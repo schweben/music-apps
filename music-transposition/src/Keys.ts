@@ -1,4 +1,4 @@
-export const CHROMATIC: String[] = [
+export const CHROMATIC: string[] = [
     "C",
     "C#",
     "D",
