@@ -15,7 +15,7 @@ export const CHROMATIC: string[] = [
     "D",
     "D#/Eb",
     "E",
-    "F/E#",
+    "F",
     "F#",
     "G",
     "G#/Ab",

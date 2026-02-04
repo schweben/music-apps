@@ -51,12 +51,10 @@ function App() {
 
     const transpose = (source: string, interval: number): string => {
         const sourceIndex = CHROMATIC.indexOf(source);
-        console.log(`Transposing '${source}' (index ${sourceIndex}) by '${interval}' steps`);
         let index = sourceIndex;
 
         for (let i = 0; interval < 0 ? i > interval: i < interval; interval < 0 ? i-- : i++) {
             index = interval > 0 ? (index + 1) % CHROMATIC.length : (index - 1 + CHROMATIC.length) % CHROMATIC.length;
-            console.log(CHROMATIC[index]);
         }
 
         return CHROMATIC[index];
