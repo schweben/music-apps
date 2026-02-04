@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
-import { CHROMATIC, INTERVALS } from './Keys';
+import { CHROMATIC, INTERVALS, TRANSPOSING_INSTRUMENTS } from './Keys';
 
 function App() {
     const [transposedKey, setTransposedKey] = useState<string>();
@@ -37,13 +37,14 @@ function App() {
         do {
             forwards++;
             index = (index + 1) % CHROMATIC.length;
-        } while (CHROMATIC[index] !== target);
+        } while (!checkNote(target, CHROMATIC[index]));
+
         // Calculate the number of semi-tones to transpose backwards
         index = sourceIndex;
         do {
             reverse++;
             index = (index - 1 + CHROMATIC.length) % CHROMATIC.length;
-        } while (CHROMATIC[index] !== target);
+        } while (!checkNote(target, CHROMATIC[index]));
         // Return the smallest number, make negative if the interval is backwards
         return forwards < reverse ? forwards : reverse * -1;
     };
@@ -61,6 +62,10 @@ function App() {
         return CHROMATIC[index];
     };
 
+    const checkNote = (note: string, enharmonic: string): boolean => {
+        return enharmonic.split('/').includes(note);
+    }
+
     return (
     <div className="App">
         <h1>Transposition</h1>
@@ -68,14 +73,9 @@ function App() {
         <form id="form" onSubmit={handleSubmit}>
             <h2>Source instrument</h2>
             <select name="sourceInstrument" defaultValue="Bb">
-                <option value="A">A Trumpet</option>
-                <option value="B">B Trumpet</option>
-                <option value="Bb">Bb Trumpet</option>
-                <option value="C">C Trumpet</option>
-                <option value="D">D Trumpet</option>
-                <option value="E">E Trumpet</option>
-                <option value="D#">Eb Trumpet</option>
-                <option value="F">F Trumpet</option>
+                {TRANSPOSING_INSTRUMENTS.map((instrument) => (
+                    <option key={instrument} value={instrument}>{instrument} Trumpet</option>
+                ))}
             </select>
 
             <h2>Source key</h2>
@@ -89,7 +89,7 @@ function App() {
                 <option value="F#">F# (6 sharps)</option>
                 <option value="C#">C# (7 sharps)</option>
                 <option value="F">F (1 flat)</option>
-                <option value="Bb">Bb (2 flatss)</option>
+                <option value="Bb">Bb (2 flats)</option>
                 <option value="Eb">Eb (3 flats)</option>
                 <option value="Ab">Ab (4 flats)</option>
                 <option value="Db">Db (5 flats)</option>
@@ -99,32 +99,18 @@ function App() {
 
             <h2>Source note</h2>
             <select name="sourceNote" defaultValue="C">
-                <option value="C">C</option>
-                <option value="C#">C#/Db</option>
-                <option value="D">D</option>
-                <option value="D#">D#/Eb</option>
-                <option value="E">E</option>
-                <option value="F">F</option>
-                <option value="F#">F#/Gb</option>
-                <option value="G">G</option>
-                <option value="G#">G#/Ab</option>
-                <option value="A">A</option>
-                <option value="Bb">A#/Bb</option>
-                <option value="B">B</option>
+                {CHROMATIC.map((note) => (
+                    <option key={note} value={note}>{note}</option>
+                ))}
             </select>
 
             <button type="submit">Transpose</button>
 
             <h2>Target instrument</h2>
             <select name="targetInstrument" defaultValue="Bb">
-                <option value="A">A Trumpet</option>
-                <option value="B">B Trumpet</option>
-                <option value="Bb">Bb Trumpet</option>
-                <option value="C">C Trumpet</option>
-                <option value="D">D Trumpet</option>
-                <option value="E">E Trumpet</option>
-                <option value="D#">Eb Trumpet</option>
-                <option value="F">F Trumpet</option>
+                {TRANSPOSING_INSTRUMENTS.map((instrument) => (
+                    <option key={instrument} value={instrument}>{instrument} Trumpet</option>
+                ))}
             </select>
 
             <h2>Transposed key: {transposedKey} ({transpositionInterval})</h2>
