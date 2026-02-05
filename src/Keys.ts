@@ -1,26 +1,26 @@
 export const TRANSPOSING_INSTRUMENTS: string[] = [
     "A",
     "B",
-    "Bb",
+    "B𝄬",
     "C",
     "D",
     "E",
-    "Eb",
+    "E𝄬",
     "F"
 ];
 
 export const CHROMATIC: string[] = [
     "C",
-    "C#/Db",
+    "C♯/D𝄬",
     "D",
-    "D#/Eb",
+    "D♯/E𝄬",
     "E",
     "F",
-    "F#",
+    "F♯",
     "G",
-    "G#/Ab",
+    "G♯/A𝄬",
     "A",
-    "A#/Bb",
+    "A♯/B𝄬",
     "B"
 ];
 

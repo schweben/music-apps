@@ -84,15 +84,15 @@ function App() {
                     <option value="A">A (3 sharps)</option>
                     <option value="E">E (4 sharps)</option>
                     <option value="B">B (5 sharps)</option>
-                    <option value="F#">F# (6 sharps)</option>
-                    <option value="C#">C# (7 sharps)</option>
+                    <option value="F♯">F♯ (6 sharps)</option>
+                    <option value="C♯">C♯ (7 sharps)</option>
                     <option value="F">F (1 flat)</option>
-                    <option value="Bb">Bb (2 flats)</option>
-                    <option value="Eb">Eb (3 flats)</option>
-                    <option value="Ab">Ab (4 flats)</option>
-                    <option value="Db">Db (5 flats)</option>
-                    <option value="Gb">Gb (6 flats)</option>
-                    <option value="Cb">Cb (7 flats)</option>
+                    <option value="B𝄬">B𝄬 (2 flats)</option>
+                    <option value="E𝄬">E𝄬 (3 flats)</option>
+                    <option value="A𝄬">A𝄬 (4 flats)</option>
+                    <option value="D𝄬">D𝄬 (5 flats)</option>
+                    <option value="G𝄬">G𝄬 (6 flats)</option>
+                    <option value="C𝄬">C𝄬 (7 flats)</option>
                 </select>
 
                 <h2>Source note</h2>
@@ -105,7 +105,7 @@ function App() {
                 <button type="submit">Transpose</button>
 
                 <h2>Target instrument</h2>
-                <select name="targetInstrument" defaultValue="Bb">
+                <select name="targetInstrument" defaultValue="B𝄬">
                     {TRANSPOSING_INSTRUMENTS.map((instrument) => (
                         <option key={instrument} value={instrument}>{instrument} Trumpet</option>
                     ))}
