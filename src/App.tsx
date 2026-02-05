@@ -69,14 +69,19 @@ function App() {
         <h1>Transposition</h1>
         <div className="panel">
             <form id="form" onSubmit={handleSubmit}>
-                <h2>Source instrument</h2>
+                <h2>Source instrument key</h2>
                 <select name="sourceInstrument" defaultValue="Bb">
                     {TRANSPOSING_INSTRUMENTS.map((instrument) => (
                         <option key={instrument} value={instrument}>{instrument} Trumpet</option>
                     ))}
                 </select>
-
-                <h2>Source key</h2>
+                <h2>Target instrument key</h2>
+                <select name="targetInstrument" defaultValue="B𝄬">
+                    {TRANSPOSING_INSTRUMENTS.map((instrument) => (
+                        <option key={instrument} value={instrument}>{instrument} Trumpet</option>
+                    ))}
+                </select>
+                <h2>Key signature</h2>
                 <select name="sourceKey" defaultValue="C">
                     <option value="C">C (no sharps or flats)</option>
                     <option value="G">G (1 sharp)</option>
@@ -94,26 +99,18 @@ function App() {
                     <option value="G𝄬">G𝄬 (6 flats)</option>
                     <option value="C𝄬">C𝄬 (7 flats)</option>
                 </select>
-
-                <h2>Source note</h2>
+                <h2>Note</h2>
                 <select name="sourceNote" defaultValue="C">
                     {CHROMATIC.map((note) => (
                         <option key={note} value={note}>{note}</option>
                     ))}
                 </select>
-
                 <button type="submit">Transpose</button>
-
-                <h2>Target instrument</h2>
-                <select name="targetInstrument" defaultValue="B𝄬">
-                    {TRANSPOSING_INSTRUMENTS.map((instrument) => (
-                        <option key={instrument} value={instrument}>{instrument} Trumpet</option>
-                    ))}
-                </select>
-
-                <h2>Transposed key: {transposedKey} ({transpositionInterval})</h2>
-                <h2>Transposed note: {transposedNote} ({transpositionInterval})</h2>
             </form>
+        </div>
+        <div className={transposedKey || transposedNote ? 'panel' : 'hidden'}>
+            <h2 className={transposedKey ? '' : 'hidden'}>Transposed key signature: {transposedKey}</h2>
+            <h2 className={transposedNote? '' : 'hidden'}>Transposed note: {transposedNote}</h2>
         </div>
     </div>
     );

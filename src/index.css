@@ -25,14 +25,39 @@ h2 {
 button {
   border-radius: 8px;
   border: 1px solid;
-  padding: 0.6em 1.2em;
+  cursor: pointer;
+  font-family: inherit;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
   transition: border-color 0.25s;
 }
-
 button:hover {
   border-color: #686877;
+  box-shadow: 0 2px 8px
+}
+button:active {
+  transform: scale(0.98);
+}
+
+select {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0 1rem 0;
+  border: 1px solid #8b7355;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+select:hover {
+  border-color: #6b5345;
+  box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
+}
+select:focus {
+  outline: none;
+  border-color: #6b5345;
+  box-shadow: 0 0 0 3px rgba(210, 181, 140, 0.5);
 }
