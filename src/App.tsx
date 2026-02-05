@@ -72,17 +72,18 @@ function App() {
                 <h2>Source instrument key</h2>
                 <select name="sourceInstrument" defaultValue="Bb">
                     {TRANSPOSING_INSTRUMENTS.map((instrument) => (
-                        <option key={instrument} value={instrument}>{instrument} Trumpet</option>
+                        <option key={instrument} value={instrument}>{instrument}</option>
                     ))}
                 </select>
                 <h2>Target instrument key</h2>
                 <select name="targetInstrument" defaultValue="B𝄬">
                     {TRANSPOSING_INSTRUMENTS.map((instrument) => (
-                        <option key={instrument} value={instrument}>{instrument} Trumpet</option>
+                        <option key={instrument} value={instrument}>{instrument}</option>
                     ))}
                 </select>
                 <h2>Key signature</h2>
-                <select name="sourceKey" defaultValue="C">
+                <select name="sourceKey" defaultValue="-">
+                    <option value="-">---</option>
                     <option value="C">C (no sharps or flats)</option>
                     <option value="G">G (1 sharp)</option>
                     <option value="D">D (2 sharps)</option>
@@ -100,9 +101,10 @@ function App() {
                     <option value="C𝄬">C𝄬 (7 flats)</option>
                 </select>
                 <h2>Note</h2>
-                <select name="sourceNote" defaultValue="C">
+                <select name="sourceNote" defaultValue="-">
+                    <option value="-">---</option>
                     {CHROMATIC.map((note) => (
-                        <option key={note} value={note}>{note}</option>
+                    <option key={note} value={note}>{note}</option>
                     ))}
                 </select>
                 <button type="submit">Transpose</button>
