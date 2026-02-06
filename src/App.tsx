@@ -6,18 +6,20 @@ import Home from './Home';
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <nav>
-                <Link to="/">Home</Link> | {" "}
-                <Link to="/scales">Scales</Link> | {" "}
-                <Link to="/transpose">Transposition</Link>
-            </nav>
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/scales" element={<ScalesPractice />}/>
-                <Route path="/transpose" element={<Transpose />}/>
-            </Routes>
-        </BrowserRouter>
+        <div className="App">
+            <BrowserRouter>
+                <nav>
+                    <Link to="/">Home</Link> | {" "}
+                    <Link to="/transpose">Transposition</Link> | {" "}
+                    <Link to="/scales">Scales Practice</Link>
+                </nav>
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/scales" element={<ScalesPractice />}/>
+                    <Route path="/transpose" element={<Transpose />}/>
+                </Routes>
+            </BrowserRouter>
+        </div>
     );
 }
 

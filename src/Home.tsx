@@ -2,10 +2,13 @@ import './Home.css';
 
 const Home = () => {
     return (
-    <div className="App">
-        <h1>Music</h1>
+    <div>
+        <h1>Music Apps</h1>
         <div className="panel">
-
+            <h2>Scales Practice</h2>
+            <p>Get a random scale to play in your practice</p>
+            <h2>Transposition</h2>
+            <p>Transpose a key signature or individual note from one key to another</p>
         </div>
     </div>
     )

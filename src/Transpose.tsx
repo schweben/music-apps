@@ -76,7 +76,7 @@ const Transpose = () => {
     }
 
     return (
-    <div className="App">
+    <div>
         <h1>Transposition</h1>
         <div className="panel">
             <form id="form" onSubmit={handleSubmit}>

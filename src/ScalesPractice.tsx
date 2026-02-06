@@ -53,7 +53,7 @@ const ScalesPractice = () => {
     }
 
     return (
-        <div className="App">
+        <div>
             <h1>Scales Practice</h1>
             <div className="panel">
                 <h2>Select which type of scale to practice</h2>
