@@ -3,8 +3,8 @@ import './Home.css';
 const Home = () => {
     return (
     <div>
-        <h1>Music Apps</h1>
         <div className="panel">
+            <h1>Music Apps</h1>
             <h2>Scales Practice</h2>
             <p>Get a random scale to play in your practice</p>
             <h2>Transposition</h2>

@@ -77,8 +77,8 @@ const Transpose = () => {
 
     return (
     <div>
-        <h1>Transposition</h1>
         <div className="panel">
+            <h1>Transposition</h1>
             <form id="form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="sourceInstrument">Source instrument key:</label>

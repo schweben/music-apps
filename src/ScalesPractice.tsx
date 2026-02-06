@@ -54,8 +54,8 @@ const ScalesPractice = () => {
 
     return (
         <div>
-            <h1>Scales Practice</h1>
             <div className="panel">
+                <h1>Scales Practice</h1>
                 <h2>Select which type of scale to practice</h2>
                 <form id="form" onSubmit={handleSubmit}>
                     <ul>
