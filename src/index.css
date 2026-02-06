@@ -72,7 +72,7 @@ select:focus {
 nav {
   padding: 1rem;
   margin: 1rem 0;
-  border: 1px solid #8b7355;
+  border: 1px solid black;
   border-radius: 8px;
   background-color: rgb(210, 181, 140);
   opacity: 0.7;
