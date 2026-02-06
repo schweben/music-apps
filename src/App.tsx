@@ -1,5 +1,5 @@
-import './App.css'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import './App.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Transpose from './Transpose';
 import ScalesPractice from './ScalesPractice';
 import Home from './Home';

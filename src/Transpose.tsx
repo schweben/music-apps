@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import './App.css'
+import './Transpose.css';
+import React, { useState } from 'react';
 import { CHROMATIC, INTERVALS, TRANSPOSING_INSTRUMENTS } from './Keys';
 
 const Transpose = () => {

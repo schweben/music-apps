@@ -1,5 +1,5 @@
+import './ScalesPractice.css'
 import { useState } from 'react';
-import './App.css'
 import { CHROMATIC_SCALES, DIMINISHED_7TH_SCALES, DOMINANT_7TH_SCALES, HARMONIC_MINOR_SCALES, MAJOR_SCALES, MELODIC_MINOR_SCALES, PENTATONIC_SCALES, type Scale } from './Scales';
 
 const ScalesPractice = () => {
