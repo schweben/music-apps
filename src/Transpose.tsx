@@ -82,7 +82,7 @@ const Transpose = () => {
             <form id="form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="sourceInstrument">Source instrument key:</label>
-                    <select id="sourceInstrument" name="sourceInstrument" defaultValue="Bb" onChange={clearValues}>
+                    <select id="sourceInstrument" name="sourceInstrument" defaultValue="C" onChange={clearValues}>
                         {TRANSPOSING_INSTRUMENTS.map((instrument) => (
                             <option key={instrument} value={instrument}>{instrument}</option>
                         ))}
@@ -90,7 +90,7 @@ const Transpose = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="targetInstrument">Target instrument key:</label>
-                        <select id="targetInstrument" name="targetInstrument" defaultValue="B𝄬" onChange={clearValues}>
+                        <select id="targetInstrument" name="targetInstrument" defaultValue="C" onChange={clearValues}>
                         {TRANSPOSING_INSTRUMENTS.map((instrument) => (
                             <option key={instrument} value={instrument}>{instrument}</option>
                         ))}
