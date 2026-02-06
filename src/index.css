@@ -78,16 +78,21 @@ nav {
   opacity: 0.7;
   text-align: center;
   font-size: 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 nav a {
   color: #2c1810;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  margin: 0 0.25rem;
   border-radius: 4px;
   transition: all 0.3s ease;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 nav a:hover {

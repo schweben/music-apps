@@ -9,8 +9,8 @@ const App = () => {
         <div className="App">
             <BrowserRouter>
                 <nav>
-                    <Link to="/">Home</Link> | {" "}
-                    <Link to="/transpose">Transposition</Link> | {" "}
+                    <Link to="/">Home</Link>
+                    <Link to="/transpose">Transposition</Link>
                     <Link to="/scales">Scales Practice</Link>
                 </nav>
                 <Routes>
