@@ -1,6 +1,6 @@
 import './Transpose.css';
 import React, { useState } from 'react';
-import { CHROMATIC, INTERVALS, TRANSPOSING_INSTRUMENTS } from './Keys';
+import { CHROMATIC, INTERVALS, KEY_SIGNATURES, TRANSPOSING_INSTRUMENTS } from './Keys';
 
 const Transpose = () => {
     const [transposedKey, setTransposedKey] = useState<string>();
@@ -19,7 +19,8 @@ const Transpose = () => {
         const transposingInterval = -interval;
 
         if (formData.sourceKey !== '-') {
-            setTransposedKey(transpose(formData.sourceKey, transposingInterval));
+            const transposedKey = transpose(formData.sourceKey, transposingInterval)
+            setTransposedKey(getKeySignature(transposedKey));
         }
         if (formData.sourceNote !== '-') {
             setTransposedNote(transpose(formData.sourceNote, transposingInterval));
@@ -75,6 +76,15 @@ const Transpose = () => {
         setTranspositionInterval(0);
     }
 
+    const getKeySignature = (enharmonic: string) : string => {
+        const key = Object.keys(KEY_SIGNATURES).find(key => {
+            if (checkNote(key, enharmonic)) {
+                return key;
+            }
+        });
+        return key ?? "";
+    }
+
     return (
     <div>
         <div className="panel">
@@ -100,21 +110,9 @@ const Transpose = () => {
                     <label htmlFor="sourceKey">Source key signature:</label>
                     <select id="sourceKey" name="sourceKey" defaultValue="-" onChange={clearValues}>
                         <option value="-">---</option>
-                        <option value="C">C (no sharps or flats)</option>
-                        <option value="G">G (1 sharp)</option>
-                        <option value="D">D (2 sharps)</option>
-                        <option value="A">A (3 sharps)</option>
-                        <option value="E">E (4 sharps)</option>
-                        <option value="B">B (5 sharps)</option>
-                        <option value="F♯">F♯ (6 sharps)</option>
-                        <option value="C♯">C♯ (7 sharps)</option>
-                        <option value="F">F (1 flat)</option>
-                        <option value="B𝄬">B𝄬 (2 flats)</option>
-                        <option value="E𝄬">E𝄬 (3 flats)</option>
-                        <option value="A𝄬">A𝄬 (4 flats)</option>
-                        <option value="D𝄬">D𝄬 (5 flats)</option>
-                        <option value="G𝄬">G𝄬 (6 flats)</option>
-                        <option value="C𝄬">C𝄬 (7 flats)</option>
+                        { Object.entries(KEY_SIGNATURES).map(([key, value]) => (
+                            <option key={key} value={key}>{key} ({value})</option>
+                        ))}
                     </select>
                 </div>
                 <div className="form-group">
@@ -131,7 +129,7 @@ const Transpose = () => {
         </div>
         <div className={transposedKey || transposedNote ? 'panel' : 'hidden'}>
                 <h2>Transposing {transpositionInterval > 0 ? 'up' : 'down'} a {INTERVALS[Math.abs(transpositionInterval)]}</h2>
-            <h2 className={transposedKey ? '' : 'hidden'}>Transposed key signature: {transposedKey}</h2>
+            <h2 className={transposedKey ? '' : 'hidden'}>Transposed key signature: {transposedKey} ({transposedKey ? KEY_SIGNATURES[transposedKey] : ''})</h2>
             <h2 className={transposedNote? '' : 'hidden'}>Transposed note: {transposedNote}</h2>
         </div>
     </div>

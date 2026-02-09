@@ -1,12 +1,12 @@
 export const TRANSPOSING_INSTRUMENTS: string[] = [
-    "A",
-    "B",
-    "B𝄬",
     "C",
     "D",
-    "E",
     "E𝄬",
-    "F"
+    "E",
+    "F",
+    "A",
+    "B𝄬",
+    "B"
 ];
 
 export const CHROMATIC: string[] = [
@@ -38,4 +38,22 @@ export const INTERVALS: Record<number, string> = {
     10: 'Minor 7th',
     11: 'Major 7th',
     12: 'Octave'
+};
+
+export const KEY_SIGNATURES: Record<string, string> = {
+    "C": "no sharps or flats",
+    "G": "1 sharp",
+    "D": "2 sharps",
+    "A": "3 sharps",
+    "E": "4 sharps",
+    "B": "5 sharps",
+    "F♯": "6 sharp",
+    "C♯": "7 sharp",
+    "F": "1 flat",
+    "B𝄬": "2 flat",
+    "E𝄬": "3 flat",
+    "A𝄬": "4 flat",
+    "D𝄬": "5 flat",
+    "G𝄬": "6 flat",
+    "C𝄬": "7 flat"
 };
