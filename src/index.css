@@ -23,6 +23,11 @@ h2 {
   margin-bottom: 0px;
 }
 
+h3 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid;

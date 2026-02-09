@@ -130,9 +130,9 @@ const Transpose = () => {
         <div className={transposedKey || transposedNote ? 'panel' : 'hidden'}>
             {transpositionInterval !== 0 ? (
                 <>
-                    <h2>Transposing {transpositionInterval > 0 ? 'up' : 'down'} a {INTERVALS[Math.abs(transpositionInterval)]}</h2>
-                    <h2 className={transposedKey ? '' : 'hidden'}>Transposed key signature: {transposedKey} ({transposedKey ? KEY_SIGNATURES[transposedKey] : ''})</h2>
-                    <h2 className={transposedNote ? '' : 'hidden'}>Transposed note: {transposedNote}</h2>
+                    <h3>Transposing {transpositionInterval > 0 ? 'up' : 'down'} a {INTERVALS[Math.abs(transpositionInterval)]}</h3>
+                    <h3 className={transposedKey ? '' : 'hidden'}>Transposed key signature: {transposedKey} ({transposedKey ? KEY_SIGNATURES[transposedKey] : ''})</h3>
+                    <h3 className={transposedNote ? '' : 'hidden'}>Transposed note: {transposedNote}</h3>
                 </>
             ) : (
                 <h2>No transposition needed, keys are in unison</h2>

@@ -71,9 +71,7 @@ const ScalesPractice = () => {
                 </form>
             </div>
             <div className={scale ? 'panel' : 'hidden'}>
-                <h2>
-                    {scale?.getName()} ({scale?.getRange()}){showKey ? " - " + scale?.getKey() : ""}
-                </h2>
+                <h3>{scale?.getName()} ({scale?.getRange()}){showKey ? " - " + scale?.getKey() : ""}</h3>
                 <button disabled={scale?.getKey() === null} onClick={() => { setShowKey(!showKey); }}>{showKey ? "Hide key" : "Show key"}</button>
             </div>
         </div>
