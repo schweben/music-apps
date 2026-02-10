@@ -236,7 +236,7 @@ describe('Transpose Component', () => {
 
       await waitFor(() => {
         const keyResult = screen.queryByText(/transposed key signature/i);
-        expect(keyResult).toHaveClass('hidden');
+        expect(keyResult).not.toBeInTheDocument();
       });
     });
   });
@@ -368,8 +368,8 @@ describe('Transpose Component', () => {
       render(<Transpose />);
 
       // Panel should not exist initially
-      let resultPanel = document.querySelector('.panel:not(:first-child)');
-      expect(resultPanel).toHaveClass('hidden');
+      let panels = document.querySelectorAll('.panel');
+      expect(panels.length).toBe(1);
 
       // Perform transposition
       const sourceNote = screen.getByLabelText(/source note/i);
@@ -380,8 +380,8 @@ describe('Transpose Component', () => {
 
       // Panel should be visible
       await waitFor(() => {
-        resultPanel = document.querySelector('.panel:not(:first-child)');
-        expect(resultPanel).not.toHaveClass('hidden');
+        panels = document.querySelectorAll('.panel');
+        expect(panels.length).toBe(2);
       });
     });
 

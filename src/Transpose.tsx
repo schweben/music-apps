@@ -5,7 +5,7 @@ import { CHROMATIC, INTERVALS, KEY_SIGNATURES, TRANSPOSING_INSTRUMENTS } from '.
 const Transpose = () => {
     const [transposedKey, setTransposedKey] = useState<string>();
     const [transposedNote, setTransposedNote] = useState<string>();
-    const [transpositionInterval, setTranspositionInterval] = useState<number>(0);
+    const [transpositionInterval, setTranspositionInterval] = useState<number>();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -21,12 +21,20 @@ const Transpose = () => {
         if (formData.sourceKey !== '-') {
             const transposedKey = transpose(formData.sourceKey, transposingInterval)
             setTransposedKey(getKeySignature(transposedKey));
+        } else {
+            setTransposedKey(undefined);
         }
         if (formData.sourceNote !== '-') {
             setTransposedNote(transpose(formData.sourceNote, transposingInterval));
+        } else {
+            setTransposedNote(undefined);
         }
         setTranspositionInterval(transposingInterval);
     };
+
+    const checkNote = (note: string, enharmonic: string): boolean => {
+        return enharmonic.split('/').includes(note);
+    }
 
     const findInstrumentInterval = (source: string, target: string): number => {
 
@@ -66,14 +74,10 @@ const Transpose = () => {
         return CHROMATIC[index];
     };
 
-    const checkNote = (note: string, enharmonic: string): boolean => {
-        return enharmonic.split('/').includes(note);
-    }
-
     const clearValues = () => {
         setTransposedKey(undefined);
         setTransposedNote(undefined);
-        setTranspositionInterval(0);
+        setTranspositionInterval(undefined);
     }
 
     const getKeySignature = (enharmonic: string) : string => {
@@ -127,17 +131,19 @@ const Transpose = () => {
                 <button type="submit">Transpose</button>
             </form>
         </div>
-        <div className={transposedKey || transposedNote ? 'panel' : 'hidden'}>
-            {transpositionInterval !== 0 ? (
-                <>
-                    <h3>Transposing {transpositionInterval > 0 ? 'up' : 'down'} a {INTERVALS[Math.abs(transpositionInterval)]}</h3>
-                    <h3 className={transposedKey ? '' : 'hidden'}>Transposed key signature: {transposedKey} ({transposedKey ? KEY_SIGNATURES[transposedKey] : ''})</h3>
-                    <h3 className={transposedNote ? '' : 'hidden'}>Transposed note: {transposedNote}</h3>
-                </>
-            ) : (
-                <h2>No transposition needed, keys are in unison</h2>
-            )}
-        </div>
+        {transpositionInterval !== undefined && (
+            <div className='panel'>
+                {transpositionInterval !== 0 ? (
+                    <>
+                        <h3>Transposing {transpositionInterval > 0 ? 'up' : 'down'} a {INTERVALS[Math.abs(transpositionInterval)]}</h3>
+                        <h3 className={transposedKey ? '' : 'hidden'}>Transposed key signature: {transposedKey} ({transposedKey ? KEY_SIGNATURES[transposedKey] : ''})</h3>
+                        <h3 className={transposedNote ? '' : 'hidden'}>Transposed note: {transposedNote}</h3>
+                    </>
+                ) : (
+                    <h2>No transposition needed, keys are in unison</h2>
+                )}
+            </div>
+        )}
     </div>
     );
 }
