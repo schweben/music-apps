@@ -119,8 +119,8 @@ describe('ScalesPractice Component', () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        const scaleText = screen.getByText(/major/i);
-        expect(scaleText).toBeInTheDocument();
+        const scaleHeading = screen.getByRole('heading', { level: 3 });
+        expect(scaleHeading.textContent).toMatch(/major/i);
       });
     });
 
@@ -187,7 +187,8 @@ describe('ScalesPractice Component', () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/pentatonic/i)).toBeInTheDocument();
+        const scaleHeading = screen.getByRole('heading', { level: 3 });
+        expect(scaleHeading.textContent).toMatch(/pentatonic/i);
       });
     });
 
@@ -205,7 +206,8 @@ describe('ScalesPractice Component', () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/dominant 7th/i)).toBeInTheDocument();
+        const scaleHeading = screen.getByRole('heading', { level: 3 });
+        expect(scaleHeading.textContent).toMatch(/dominant 7th/i);
       });
     });
 
@@ -237,7 +239,7 @@ describe('ScalesPractice Component', () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        const scaleDisplay = screen.getByText(/major/i);
+        const scaleDisplay = screen.getByRole('heading', { level: 3 });
         expect(scaleDisplay.textContent).not.toMatch(/sharp|flat/i);
       });
     });
@@ -272,7 +274,7 @@ describe('ScalesPractice Component', () => {
       await user.click(showKeyButton);
 
       await waitFor(() => {
-        const scaleDisplay = screen.getByText(/major/i);
+        const scaleDisplay = screen.getByRole('heading', { level: 3 });
         expect(scaleDisplay.textContent).toMatch(/sharp|flat|no sharps or flats/i);
       });
     });
@@ -363,7 +365,7 @@ describe('ScalesPractice Component', () => {
 
       let firstScale: string = '';
       await waitFor(() => {
-        const scaleElement = screen.getByText(/major/i);
+        const scaleElement = screen.getByRole('heading', { level: 3 });
         firstScale = scaleElement.textContent || '';
         expect(firstScale).toBeTruthy();
       });
@@ -372,7 +374,7 @@ describe('ScalesPractice Component', () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        const scaleElement = screen.getByText(/major/i);
+        const scaleElement = screen.getByRole('heading', { level: 3 });
         const secondScale = scaleElement.textContent || '';
         // Note: Due to randomness, they might be the same, but the code attempts to avoid it
         expect(secondScale).toBeTruthy();
@@ -407,17 +409,17 @@ describe('ScalesPractice Component', () => {
       const user = userEvent.setup();
       render(<ScalesPractice />);
 
-      // Panel should be hidden initially
+      // Panel should not exist initially
       const panels = document.querySelectorAll('.panel');
-      expect(panels[1]).toHaveClass('hidden');
+      expect(panels.length).toBe(1);
 
       const submitButton = screen.getByRole('button', { name: /get a scale/i });
       await user.click(submitButton);
 
       // Panel should be visible after generation
       await waitFor(() => {
-        const resultPanel = document.querySelectorAll('.panel')[1];
-        expect(resultPanel).not.toHaveClass('hidden');
+        const resultPanels = document.querySelectorAll('.panel');
+        expect(resultPanels.length).toBe(2);
       });
     });
 
@@ -431,16 +433,16 @@ describe('ScalesPractice Component', () => {
 
       await waitFor(() => {
         const panels = document.querySelectorAll('.panel');
-        expect(panels[1]).not.toHaveClass('hidden');
+        expect(panels.length).toBe(2);
       });
 
       // Click a checkbox to clear
       const harmonicCheckbox = screen.getByLabelText(/harmonic minor/i);
       await user.click(harmonicCheckbox);
 
-      // Panel should be hidden
+      // Panel should not exist anymore
       const panels = document.querySelectorAll('.panel');
-      expect(panels[1]).toHaveClass('hidden');
+      expect(panels.length).toBe(1);
     });
   });
 
@@ -505,9 +507,9 @@ describe('ScalesPractice Component', () => {
       // This should not crash, though no scale will be generated
       await user.click(submitButton);
 
-      // Panel should remain hidden
+      // Panel should not exist
       const panels = document.querySelectorAll('.panel');
-      expect(panels[1]).toHaveClass('hidden');
+      expect(panels.length).toBe(1);
     });
   });
 });

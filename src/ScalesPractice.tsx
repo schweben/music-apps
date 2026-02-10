@@ -38,12 +38,24 @@ const ScalesPractice = () => {
             scales.push(...DIMINISHED_7TH_SCALES);
         }
 
-        // Ensure that we always get a different scale
+        // Don't generate a scale if no types are selected
+        if (scales.length === 0) {
+            setScale(undefined);
+            return;
+        }
+
+        // Ensure that we always get a different scale (if possible)
         let randomScale: Scale;
-        do {
-            const random = Math.floor(Math.random() * (scales.length));
-            randomScale = scales[random];
-        } while (randomScale === scale)
+        if (scales.length === 1) {
+            // Only one scale available, just use it
+            randomScale = scales[0];
+        } else {
+            // Multiple scales available, find a different one
+            do {
+                const random = Math.floor(Math.random() * (scales.length));
+                randomScale = scales[random];
+            } while (randomScale === scale);
+        }
         setScale(randomScale);
     };
 
@@ -70,10 +82,12 @@ const ScalesPractice = () => {
                     <button type="submit">Get a scale</button>
                 </form>
             </div>
-            <div className={scale ? 'panel' : 'hidden'}>
-                <h3>{scale?.getName()} ({scale?.getRange()}){showKey ? " - " + scale?.getKey() : ""}</h3>
-                <button disabled={scale?.getKey() === null} onClick={() => { setShowKey(!showKey); }}>{showKey ? "Hide key" : "Show key"}</button>
-            </div>
+            {scale && (
+                <div className='panel'>
+                    <h3>{scale.getName()} ({scale.getRange()}){showKey ? " - " + scale.getKey() : ""}</h3>
+                    <button disabled={scale.getKey() === null} onClick={() => { setShowKey(!showKey); }}>{showKey ? "Hide key" : "Show key"}</button>
+                </div>
+            )}
         </div>
     )
 }
