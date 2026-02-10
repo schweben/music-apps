@@ -70,8 +70,14 @@ const Transpose = () => {
             reverse++;
             index = (index - 1 + CHROMATIC.length) % CHROMATIC.length;
         } while (!checkNote(target, CHROMATIC[index]));
-        // Return the smallest number, make negative if the interval is backwards
-        return forwards < reverse ? forwards : reverse * -1;
+
+        if (forwards === reverse) {
+            // If the forwards or backwareds intervals are the same transpose down
+            return forwards;
+        } else {
+            // Return the smallest number, make negative if the interval is backwards
+            return forwards < reverse ? forwards : reverse * -1;
+        }
     };
 
     const transpose = (source: string, interval: number): string => {
