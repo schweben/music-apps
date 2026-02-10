@@ -33,14 +33,25 @@ const Transpose = () => {
     };
 
     const checkNote = (note: string, enharmonic: string): boolean => {
-        return enharmonic.split('/').includes(note);
-    }
+        return note === enharmonic ? note : enharmonic.split('/').includes(note);
+        // return enharmonic.split('/').includes(note);
+    };
+
+    const getNoteIndex = (note: string): number => {
+        const result = CHROMATIC.find(chromatic => {
+            if (checkNote(note, chromatic)) {
+                return chromatic;
+            }
+        })
+        return result ? CHROMATIC.indexOf(result) : -1;
+    };
 
     const findInstrumentInterval = (source: string, target: string): number => {
 
         if (source === target) return 0;
 
-        const sourceIndex = CHROMATIC.indexOf(source);
+        // const sourceIndex = CHROMATIC.indexOf(source);
+        const sourceIndex = getNoteIndex(source);
 
         let index = sourceIndex;
 
@@ -64,7 +75,8 @@ const Transpose = () => {
     };
 
     const transpose = (source: string, interval: number): string => {
-        const sourceIndex = CHROMATIC.indexOf(source);
+        // const sourceIndex = CHROMATIC.indexOf(source);
+        const sourceIndex = getNoteIndex(source);
         let index = sourceIndex;
 
         for (let i = 0; interval < 0 ? i > interval: i < interval; interval < 0 ? i-- : i++) {
