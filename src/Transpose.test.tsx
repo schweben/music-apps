@@ -139,8 +139,48 @@ describe('Transpose Component', () => {
   });
 
   describe('Transposition - All key combinations', () => {
-    describe('Transpose from instrument in C to instrument in D (down a Major 2nd)', () => {
-      it('should transpose from C to B𝄬', async () => {
+    describe.each([
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "C", expectedInterval: "down a major 2nd", expectedNote: "A" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "C", expectedInterval: "down a major 2nd", expectedNote: "A♯/B𝄬" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "C♯/D𝄬", expectedInterval: "down a major 2nd", expectedNote: "B" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "D", expectedInterval: "down a major 2nd", expectedNote: "C" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "D♯/E𝄬", expectedInterval: "down a major 2nd", expectedNote: "C♯/D𝄬" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "E", expectedInterval: "down a major 2nd", expectedNote: "D" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "F", expectedInterval: "down a major 2nd", expectedNote: "D♯/E𝄬" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "F♯", expectedInterval: "down a major 2nd", expectedNote: "E" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "G", expectedInterval: "down a major 2nd", expectedNote: "F" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "G♯/A𝄬", expectedInterval: "down a major 2nd", expectedNote: "F♯" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "A", expectedInterval: "down a major 2nd", expectedNote: "G" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "A♯/B𝄬", expectedInterval: "down a major 2nd", expectedNote: "G♯/A𝄬" },
+      { testSourceInstrument: "C", testTargetInstrument: "D", testSourceNote: "B", expectedInterval: "down a major 2nd", expectedNote: "A" },
+
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "C", expectedInterval: "down a minor 3rd", expectedNote: "A" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "C♯/D𝄬", expectedInterval: "down a minor 3rd", expectedNote: "A♯/B𝄬" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "D", expectedInterval: "down a minor 3rd", expectedNote: "B" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "D♯/E𝄬", expectedInterval: "down a minor 3rd", expectedNote: "C" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "E", expectedInterval: "down a minor 3rd", expectedNote: "C♯" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "F", expectedInterval: "down a minor 3rd", expectedNote: "D" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "F♯", expectedInterval: "down a minor 3rd", expectedNote: "D♯/E𝄬" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "G", expectedInterval: "down a minor 3rd", expectedNote: "E" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "G♯/A𝄬", expectedInterval: "down a minor 3rd", expectedNote: "F" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "A", expectedInterval: "down a minor 3rd", expectedNote: "F♯" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "A♯/B𝄬", expectedInterval: "down a minor 3rd", expectedNote: "G" },
+      { testSourceInstrument: "C", testTargetInstrument: "E𝄬", testSourceNote: "B", expectedInterval: "down a minor 3rd", expectedNote: "G♯" },
+
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "C", expectedInterval: "down a major 3rd", expectedNote: "G♯/A𝄬" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "C♯/D𝄬", expectedInterval: "down a major 3rd", expectedNote: "A" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "D", expectedInterval: "down a major 3rd", expectedNote: "A♯/B𝄬" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "D♯/E𝄬", expectedInterval: "down a major 3rd", expectedNote: "B" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "E", expectedInterval: "down a major 3rd", expectedNote: "C" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "F", expectedInterval: "down a major 3rd", expectedNote: "C♯/D𝄬" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "F♯", expectedInterval: "down a major 3rd", expectedNote: "D" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "G", expectedInterval: "down a major 3rd", expectedNote: "D♯/E𝄬" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "G♯/A𝄬", expectedInterval: "down a major 3rd", expectedNote: "E" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "A", expectedInterval: "down a major 3rd", expectedNote: "F" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "A♯/B𝄬", expectedInterval: "down a major 3rd", expectedNote: "F♯" },
+      { testSourceInstrument: "C", testTargetInstrument: "E", testSourceNote: "B", expectedInterval: "down a major 3rd", expectedNote: "G" },
+    ])(`Transpose from instrument in $testSourceInstrument to instrument in $testTargetInstrument`, ({ testSourceInstrument, testTargetInstrument, testSourceNote, expectedInterval, expectedNote}) => {
+      it(`should transpose from ${testSourceNote} ${expectedInterval} to ${expectedNote}`, async () => {
         const user = userEvent.setup();
         render(<Transpose />);
 
@@ -148,18 +188,18 @@ describe('Transpose Component', () => {
         const targetInstrument = screen.getByLabelText(/target instrument key/i);
         const sourceNote = screen.getByLabelText(/source note/i);
 
-        await user.selectOptions(sourceInstrument, 'C');
-        await user.selectOptions(targetInstrument, 'D');
-        await user.selectOptions(sourceNote, 'C');
+        await user.selectOptions(sourceInstrument, testSourceInstrument);
+        await user.selectOptions(targetInstrument, testTargetInstrument);
+        await user.selectOptions(sourceNote, testSourceNote);
 
         const submitButton = screen.getByRole('button', { name: /transpose/i });
         await user.click(submitButton);
 
         await waitFor(() => {
-          expect(screen.getByText(/transposing down a major 2nd/i)).toBeInTheDocument();
-          expect(screen.getByText(/transposed note:.A♯\/B𝄬/i)).toBeInTheDocument();
+          expect(screen.getByText(new RegExp(`transposing ${expectedInterval}`, 'i'))).toBeInTheDocument();
+          expect(screen.getByText(new RegExp(`transposed note:.*${expectedNote}`, 'i'))).toBeInTheDocument();
         });
-      });
+      })
     });
   });
 
