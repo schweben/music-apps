@@ -138,6 +138,31 @@ describe('Transpose Component', () => {
     });
   });
 
+  describe('Transposition - All key combinations', () => {
+    describe('Transpose from instrument in C to instrument in D (down a Major 2nd)', () => {
+      it('should transpose from C to B𝄬', async () => {
+        const user = userEvent.setup();
+        render(<Transpose />);
+
+        const sourceInstrument = screen.getByLabelText(/source instrument key/i);
+        const targetInstrument = screen.getByLabelText(/target instrument key/i);
+        const sourceNote = screen.getByLabelText(/source note/i);
+
+        await user.selectOptions(sourceInstrument, 'C');
+        await user.selectOptions(targetInstrument, 'D');
+        await user.selectOptions(sourceNote, 'C');
+
+        const submitButton = screen.getByRole('button', { name: /transpose/i });
+        await user.click(submitButton);
+
+        await waitFor(() => {
+          expect(screen.getByText(/transposing down a major 2nd/i)).toBeInTheDocument();
+          expect(screen.getByText(/transposed note:.A♯\/B𝄬/i)).toBeInTheDocument();
+        });
+      });
+    });
+  });
+
   describe('Transposition - Different Instruments', () => {
     it('should transpose from C to B♭ instrument (up a Major 2nd)', async () => {
       const user = userEvent.setup();
