@@ -27,7 +27,7 @@ Then take the build output files from /dist
 
 ## TODO
 
-- [ ] Add help
+- [X] Add help
 - [ ] Add circle of fifths
 - [ ] Display test results on dashboard
 - [ ] Display code coverage on dashboard
