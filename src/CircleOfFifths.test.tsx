@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import CircleOfFifths from './CircleOfFifths';
 
 // Basic test class for CircleOfFifths component
@@ -8,7 +8,7 @@ describe('CircleOfFifths Component', () => {
   describe('Component Rendering', () => {
     it('should render the canvas element', () => {
       render(<CircleOfFifths />);
-      const canvas = screen.getByRole('img', { hidden: true }) || document.querySelector('canvas');
+      const canvas = document.querySelector('canvas');
       expect(canvas).toBeInTheDocument();
     });
 

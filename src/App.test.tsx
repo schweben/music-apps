@@ -8,7 +8,7 @@ describe('App Component', () => {
     it('should render navigation links', () => {
       render(<App />);
 
-      expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /circle of fifths/i })).toBeInTheDocument();
       expect(screen.getByRole('link', { name: /transposition/i })).toBeInTheDocument();
       expect(screen.getByRole('link', { name: /scales practice/i })).toBeInTheDocument();
     });
@@ -16,7 +16,7 @@ describe('App Component', () => {
     it('should have correct href attributes', () => {
       render(<App />);
 
-      expect(screen.getByRole('link', { name: /home/i })).toHaveAttribute('href', '/');
+      expect(screen.getByRole('link', { name: /circle of fifths/i })).toHaveAttribute('href', '/');
       expect(screen.getByRole('link', { name: /transposition/i })).toHaveAttribute('href', '/transpose');
       expect(screen.getByRole('link', { name: /scales practice/i })).toHaveAttribute('href', '/scales');
     });
@@ -39,12 +39,12 @@ describe('App Component', () => {
   });
 
   describe('Routing', () => {
-    it('should render Home component on root path', () => {
+    it('should render CicleOfFifths component on root path', () => {
       // App uses BrowserRouter internally, so just render App
       // The default route is already '/'
       render(<App />);
 
-      expect(screen.getByText('Music Apps')).toBeInTheDocument();
+      expect(screen.getByText('CircleOfFifths')).toBeInTheDocument();
     });
 
     it('should render Transpose component on /transpose path', async () => {
