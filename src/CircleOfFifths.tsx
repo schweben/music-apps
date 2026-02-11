@@ -22,13 +22,13 @@ const CircleOfFifths = () => {
 
         // Set stroke color and width
         ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1;
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
 
         const outerRadius = 290;
         const middleRadius = 200;
-        const innerRadius = 100;
+        const innerRadius = 70;
 
         // Draw outer circle
         ctx.beginPath();
