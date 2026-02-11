@@ -9,8 +9,8 @@ const HelpPanel = ({message}: {message: string}) => {
             <button type="button" className="help-button" onClick={() => setHelpMessage(message)}>?</button>
             { helpMessage !== undefined && (
             <div className='help-panel'>
-                <h3>{helpMessage}</h3>
-                    <button type="button" className="close-button" onClick={() => setHelpMessage(undefined)}>X</button>
+                <p>{helpMessage}</p>
+                <button type="button" className="close-button" onClick={() => setHelpMessage(undefined)}>X</button>
             </div>
             )}
         </div>

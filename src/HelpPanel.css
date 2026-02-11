@@ -17,10 +17,6 @@
     gap: 1rem;
 }
 
-.help-panel h3 {
-    margin: 0;
-}
-
 .help-button {
     position: absolute;
     right: 0;

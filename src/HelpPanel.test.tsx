@@ -52,15 +52,16 @@ describe('HelpPanel Component', () => {
       expect(screen.getByText(testMessage)).toBeInTheDocument();
     });
 
-    it('should display help panel in an h3 heading', async () => {
+    it('should display help panel in a paragraph', async () => {
       const user = userEvent.setup();
       render(<HelpPanel message="Test message" />);
 
       const button = screen.getByRole('button', { name: /\?/i });
       await user.click(button);
 
-      const heading = screen.getByRole('heading', { level: 3, name: 'Test message' });
-      expect(heading).toBeInTheDocument();
+      const paragraph = screen.getByRole('paragraph');
+      expect(paragraph).toBeInTheDocument();
+      expect(paragraph).toHaveTextContent('Test message');
     });
 
     it('should have correct CSS class on help panel', async () => {
