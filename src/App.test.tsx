@@ -39,12 +39,12 @@ describe('App Component', () => {
   });
 
   describe('Routing', () => {
-    it('should render CicleOfFifths component on root path', () => {
+    it('should render CircleOfFifths component on root path', () => {
       // App uses BrowserRouter internally, so just render App
       // The default route is already '/'
       render(<App />);
 
-      expect(screen.getByText('CircleOfFifths')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /circle of fifths/i })).toBeInTheDocument();
     });
 
     it('should render Transpose component on /transpose path', async () => {
@@ -73,8 +73,8 @@ describe('App Component', () => {
       const user = userEvent.setup();
       render(<App />);
 
-      // Should start on home
-      expect(screen.getByText('Music Apps')).toBeInTheDocument();
+      // Should start on circle of fifths
+      expect(screen.getByRole('heading', { name: /circle of fifths/i })).toBeInTheDocument();
 
       // Navigate to transpose
       const transposeLink = screen.getByRole('link', { name: /transposition/i });
@@ -88,11 +88,11 @@ describe('App Component', () => {
 
       expect(screen.getByText('Select which type of scale to practice')).toBeInTheDocument();
 
-      // Navigate back to home
-      const homeLink = screen.getByRole('link', { name: /home/i });
-      await user.click(homeLink);
+      // Navigate back to Circle of Fifths
+      const circleOfFifthsLink = screen.getByRole('link', { name: /circle of fifths/i });
+      await user.click(circleOfFifthsLink);
 
-      expect(screen.getByText('Music Apps')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /circle of fifths/i })).toBeInTheDocument();
     });
   });
 
@@ -121,7 +121,7 @@ describe('App Component', () => {
       await user.click(transposeLink);
 
       // Navigation should be present on all pages
-      expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /circle of fifths/i })).toBeInTheDocument();
       expect(screen.getByRole('link', { name: /transposition/i })).toBeInTheDocument();
       expect(screen.getByRole('link', { name: /scales practice/i })).toBeInTheDocument();
     });
@@ -145,8 +145,8 @@ describe('App Component', () => {
     it('should only render one route component at a time', () => {
       render(<App />);
 
-      // Home page should be visible
-      expect(screen.getByText('Music Apps')).toBeInTheDocument();
+      // Circle of Fifths page should be visible
+      expect(screen.getByRole('heading', { name: /circle of fifths/i })).toBeInTheDocument();
 
       // Transpose and Scales pages should not be visible
       expect(screen.queryByLabelText(/source instrument key/i)).not.toBeInTheDocument();
@@ -166,7 +166,7 @@ describe('App Component', () => {
       const user = userEvent.setup();
       render(<App />);
 
-      const homeLink = screen.getByRole('link', { name: /home/i });
+      const circleOfFifthsLink = screen.getByRole('link', { name: /circle of fifths/i });
       const transposeLink = screen.getByRole('link', { name: /transposition/i });
       const scalesLink = screen.getByRole('link', { name: /scales practice/i });
 
@@ -177,8 +177,8 @@ describe('App Component', () => {
       await user.click(scalesLink);
       expect(screen.getByText('Select which type of scale to practice')).toBeInTheDocument();
 
-      await user.click(homeLink);
-      expect(screen.getByText('Music Apps')).toBeInTheDocument();
+      await user.click(circleOfFifthsLink);
+      expect(screen.getByRole('heading', { name: /circle of fifths/i })).toBeInTheDocument();
     });
   });
 });
