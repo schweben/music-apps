@@ -8,5 +8,10 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
-  },
-})
+    reporters: ['default', 'junit'],
+    outputFile: 'test-results.xml',
+    coverage: {
+      reporter: ['json-summary', 'json'],
+    }
+  }
+});

@@ -35,3 +35,5 @@ Then take the build output files from /dist
 ## Bugs
 
 - [ ] Help screen doesn't display properly on mobile
+- [ ] Circle of fifths doesn't scale properly on mobile
+- [ ] Error message on running unit tests 'Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package'
