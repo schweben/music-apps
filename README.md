@@ -29,8 +29,8 @@ Then take the build output files from /dist
 
 - [X] Add help
 - [X] Add circle of fifths
-- [ ] Display test results on dashboard
-- [ ] Display code coverage on dashboard
+- [X] Display test results on dashboard
+- [X] Display code coverage on dashboard
 
 ## Bugs
 
