@@ -1,6 +1,7 @@
 import './Transpose.css';
 import React, { useState } from 'react';
 import { CHROMATIC, INTERVALS, KEY_SIGNATURES, TRANSPOSING_INSTRUMENTS } from './Keys';
+import HelpPanel from './HelpPanel';
 
 const Transpose = () => {
     const [transposedKey, setTransposedKey] = useState<string>();
@@ -109,7 +110,11 @@ const Transpose = () => {
     return (
     <div>
         <div className="panel">
-            <h1>Transposition</h1>
+            <div className="panel-header">
+                <h1>Transposition</h1>
+                <HelpPanel message="This allows the user to select a source instrument key (e.g. a C trumpet) and a target instrument key (e.g. a B𝄬 trumpet)
+                                    and then transpose a key signature and/or a specific note from the source to the target"/>
+            </div>
             <form id="form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="sourceInstrument">Source instrument key:</label>

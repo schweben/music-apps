@@ -15,7 +15,7 @@ h1 {
   font-size: 2.5em;
   line-height: 1.1;
   margin-top: 0px;
-  margin-bottom: 1rem;
+  margin-bottom: 0px;
 }
 
 h2 {
@@ -142,6 +142,14 @@ nav a.active {
   border-radius: 8px;
   background-color: rgb(210, 181, 140);
   opacity: 0.7;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1rem;
 }
 
 form {

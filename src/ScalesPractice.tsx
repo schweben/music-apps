@@ -1,10 +1,12 @@
 import './ScalesPractice.css'
 import { useState } from 'react';
 import { CHROMATIC_SCALES, DIMINISHED_7TH_SCALES, DOMINANT_7TH_SCALES, HARMONIC_MINOR_SCALES, MAJOR_SCALES, MELODIC_MINOR_SCALES, PENTATONIC_SCALES, type Scale } from './Scales';
+import HelpPanel from './HelpPanel';
 
 const ScalesPractice = () => {
     const [scale, setScale] = useState<Scale>();
     const [showKey, setShowKey] = useState<boolean>(false);
+    const [helpMessage, setHelpMessage] = useState<string>();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         // Prevent the browser from reloading the page
@@ -67,7 +69,11 @@ const ScalesPractice = () => {
     return (
         <div>
             <div className="panel">
-                <h1>Scales Practice</h1>
+                <div className="panel-header">
+                    <h1>Scales Practice</h1>
+                    <HelpPanel message="This presents the user with a list of different types of musical scale. One or more can be selected and the application will
+                                        then choose a random scale for the user to practice from the selected choices."/>
+                </div>
                 <h2>Select which type of scale to practice</h2>
                 <form id="form" onSubmit={handleSubmit}>
                     <ul>
@@ -86,6 +92,12 @@ const ScalesPractice = () => {
                 <div className='panel'>
                     <h3>{scale.getName()} ({scale.getRange()}){showKey ? " - " + scale.getKey() : ""}</h3>
                     <button disabled={scale.getKey() === null} onClick={() => { setShowKey(!showKey); }}>{showKey ? "Hide key" : "Show key"}</button>
+                </div>
+            )}
+            {helpMessage !== undefined && (
+                <div className='help-panel'>
+                    <h3>{helpMessage}</h3>
+                    <button type="button" className="close-button" onClick={() => setHelpMessage(undefined)}>X</button>
                 </div>
             )}
         </div>
