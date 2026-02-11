@@ -33,8 +33,7 @@ const Transpose = () => {
     };
 
     const checkNote = (note: string, enharmonic: string): boolean => {
-        return note === enharmonic ? note : enharmonic.split('/').includes(note);
-        // return enharmonic.split('/').includes(note);
+        return note === enharmonic ? true : enharmonic.split('/').includes(note);
     };
 
     const getNoteIndex = (note: string): number => {
