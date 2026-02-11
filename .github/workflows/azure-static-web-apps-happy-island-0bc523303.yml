@@ -37,7 +37,6 @@ jobs:
         if: (!cancelled())
         with:
           files: test-results.xml
-          fail-on-error: true
 
       - name: Publish Coverage Report
         uses: davelosert/vitest-coverage-report-action@v2
