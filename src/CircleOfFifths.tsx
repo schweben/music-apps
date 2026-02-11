@@ -1,5 +1,6 @@
 
 import { useEffect, useRef } from 'react';
+import { MAJOR_KEYS, MINOR_KEYS } from './Fifths';
 
 
 const CircleOfFifths = () => {
@@ -64,6 +65,8 @@ const CircleOfFifths = () => {
         // Add the first angle + 360 to close the circle for the last segment
         lineAngles.push(lineAngles[0] + 360);
 
+        // background - color: rgba(255, 255, 255, 0.9);
+
         // Set text style once before drawing all letters
         ctx.font = '32px Arial';
         ctx.fillStyle = '#000000';
@@ -79,12 +82,12 @@ const CircleOfFifths = () => {
             const outerTextRadius = (middleRadius + outerRadius) / 2;
             const outerTextX = centerX + outerTextRadius * Math.cos(midAngleRad);
             const outerTextY = centerY + outerTextRadius * Math.sin(midAngleRad);
-            ctx.fillText('C', outerTextX, outerTextY);
+            ctx.fillText(MAJOR_KEYS[i], outerTextX, outerTextY);
 
             const innerTextRadius = (innerRadius + middleRadius) / 2;
             const innerTextX = centerX + innerTextRadius * Math.cos(midAngleRad);
             const innerTextY = centerY + innerTextRadius * Math.sin(midAngleRad);
-            ctx.fillText('C', innerTextX, innerTextY);
+            ctx.fillText(MINOR_KEYS[i], innerTextX, innerTextY);
         }
 
     }); // No dependency array: runs after every render
