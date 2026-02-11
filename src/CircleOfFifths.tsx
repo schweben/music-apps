@@ -1,6 +1,7 @@
 
 import { useEffect, useRef } from 'react';
 import { MAJOR_KEYS, MINOR_KEYS } from './Fifths';
+import HelpPanel from './HelpPanel';
 
 
 const CircleOfFifths = () => {
@@ -96,6 +97,12 @@ const CircleOfFifths = () => {
 
     return (
         <div className="panel">
+            <div className="panel-header">
+                <h1>Circle of Fifths</h1>
+                <HelpPanel message="The circle of fifths is a visualization of all major keys and minor keys.
+                                    The major keys are in the outer circle and their relative minor keys are in the inner circle.
+                                    Each letter on the circle of fifths can also represent a chord or a note."/>
+            </div>
             <canvas ref={canvasRef} id="circleOfFifths"></canvas>
         </div>
     );
