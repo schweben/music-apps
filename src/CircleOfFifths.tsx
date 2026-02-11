@@ -45,9 +45,12 @@ const CircleOfFifths = () => {
         ctx.stroke();
 
         // Draw lines from inner circle to outer circle using degrees
-        for (let degrees = 15; degrees < 360; degrees = degrees + 30) {
-
-            // Convert degrees to radians (-90 to make 0 deg point up)
+        const segmentCount = 12;
+        const segmentAngle = 30;
+        const lineAngles = [];
+        for (let degrees = 15; degrees < 360; degrees += segmentAngle) {
+            lineAngles.push(degrees);
+            // Draw lines as before
             const angleRad = (degrees - 90) * Math.PI / 180;
             const startX = centerX + innerRadius * Math.cos(angleRad);
             const startY = centerY + innerRadius * Math.sin(angleRad);
@@ -57,6 +60,31 @@ const CircleOfFifths = () => {
             ctx.moveTo(startX, startY);
             ctx.lineTo(endX, endY);
             ctx.stroke();
+        }
+        // Add the first angle + 360 to close the circle for the last segment
+        lineAngles.push(lineAngles[0] + 360);
+
+        // Set text style once before drawing all letters
+        ctx.font = '32px Arial';
+        ctx.fillStyle = '#000000';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        for (let i = 0; i < segmentCount; i++) {
+            // Midpoint angle between two lines
+            const angle1 = lineAngles[i];
+            const angle2 = lineAngles[i + 1];
+            const midAngle = ((angle1 + angle2) / 2);
+            const midAngleRad = (midAngle - 90) * Math.PI / 180;
+            const outerTextRadius = (middleRadius + outerRadius) / 2;
+            const outerTextX = centerX + outerTextRadius * Math.cos(midAngleRad);
+            const outerTextY = centerY + outerTextRadius * Math.sin(midAngleRad);
+            ctx.fillText('C', outerTextX, outerTextY);
+
+            const innerTextRadius = (innerRadius + middleRadius) / 2;
+            const innerTextX = centerX + innerTextRadius * Math.cos(midAngleRad);
+            const innerTextY = centerY + innerTextRadius * Math.sin(midAngleRad);
+            ctx.fillText('C', innerTextX, innerTextY);
         }
 
     }); // No dependency array: runs after every render
