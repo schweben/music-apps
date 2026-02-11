@@ -28,10 +28,10 @@ Then take the build output files from /dist
 ## TODO
 
 - [X] Add help
-- [ ] Add circle of fifths
+- [X] Add circle of fifths
 - [ ] Display test results on dashboard
 - [ ] Display code coverage on dashboard
 
 ## Bugs
 
-None currently reported
+- [ ] Help screen doesn't display properly on mobile
