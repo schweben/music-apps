@@ -1,3 +1,4 @@
+import CircleOfFifths from './CircleOfFifths';
 import './Home.css';
 
 const Home = () => {
@@ -10,7 +11,8 @@ const Home = () => {
             <h2>Transposition</h2>
             <p>Transpose a key signature or individual note from one key to another</p>
         </div>
+        <CircleOfFifths/>
     </div>
-    )
+    );
 }
 export default Home;

@@ -101,7 +101,7 @@ const ScalesPractice = () => {
                 </div>
             )}
         </div>
-    )
+    );
 }
 
 export default ScalesPractice;
