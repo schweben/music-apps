@@ -33,6 +33,8 @@ const CircleOfFifths = () => {
         // Draw outer circle
         ctx.beginPath();
         ctx.arc(centerX, centerY, outerRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+        ctx.fill();
         ctx.stroke();
 
         // Draw middle circle
@@ -43,6 +45,8 @@ const CircleOfFifths = () => {
         // Draw inner circle
         ctx.beginPath();
         ctx.arc(centerX, centerY, innerRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgb(210, 181, 140)";
+        ctx.fill();
         ctx.stroke();
 
         // Draw lines from inner circle to outer circle using degrees
@@ -64,8 +68,6 @@ const CircleOfFifths = () => {
         }
         // Add the first angle + 360 to close the circle for the last segment
         lineAngles.push(lineAngles[0] + 360);
-
-        // background - color: rgba(255, 255, 255, 0.9);
 
         // Set text style once before drawing all letters
         ctx.font = '32px Arial';
