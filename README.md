@@ -31,9 +31,13 @@ Then take the build output files from /dist
 - [X] Add circle of fifths
 - [X] Display test results on dashboard
 - [X] Display code coverage on dashboard
+- [ ] Improve help text
 
 ## Bugs
 
 - [ ] Help screen doesn't display properly on mobile
 - [ ] Circle of fifths doesn't scale properly on mobile
-- [ ] Error message on running unit tests 'Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package'
+- [X] Error message on running unit tests 'Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package'
+- [ ] Flat symbols don't render on iOS
+- [ ] Buttons are blue on iOS
+- [X] Scales practice does not use the same sharps and flats symbols as the rest of the application
