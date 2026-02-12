@@ -13,18 +13,22 @@ body {
 }
 
 h1 {
-  font-size: 2.5em;
-  line-height: 1.1;
+  font-size: 1.5em;
+  line-height: 1.3;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
 h2 {
+  font-size: 1.25em;
+  line-height: 1.3;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
 h3 {
+  font-size: 1.1em;
+  line-height: 1.2;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
@@ -125,6 +129,20 @@ nav a.active {
     background-position-x: center;
   }
 
+  h1 {
+    font-size: 2.25em;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: 1.75em;
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
   form {
     gap: 1rem;
   }
@@ -143,6 +161,20 @@ nav a.active {
 
   select {
     margin: 0.5rem 0 1rem 0;
+  }
+}
+
+@media (min-width: 1025px) {
+  h1 {
+    font-size: 2.5em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  h3 {
+    font-size: 1.5em;
   }
 }
 
