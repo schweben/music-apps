@@ -106,9 +106,8 @@ const CircleOfFifths = () => {
         <div className="panel">
             <div className="panel-header">
                 <h1>Circle of Fifths</h1>
-                <HelpPanel message="The circle of fifths is a visualization of all major keys and minor keys.
-                                    The major keys are in the outer circle and their relative minor keys are in the inner circle.
-                                    Each letter on the circle of fifths can also represent a chord or a note."/>
+                <HelpPanel message={['The circle of fifths is a way of visualising all major keys and minor keys. The major keys are in the outer circle and their relative minor keys are in the inner circle.',
+                                     'The circle shows that one sharp is added to the key signature for each increasing fifth interval, by proceeding clockwise around the circle. Likewise, proceeding anti-clockwise around the circle shows that one flat is added for each increasing fourth interval.']}/>
             </div>
             <canvas ref={canvasRef} id="circleOfFifths"></canvas>
         </div>

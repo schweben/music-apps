@@ -71,8 +71,7 @@ const ScalesPractice = () => {
             <div className="panel">
                 <div className="panel-header">
                     <h1>Scales Practice</h1>
-                    <HelpPanel message="This presents the user with a list of different types of musical scale. One or more can be selected and the application will
-                                        then choose a random scale for the user to practice from the selected choices."/>
+                    <HelpPanel message={['This presents the user with a list of different types of musical scale. One or more can be selected and the application will then choose a random scale for the user to practice from the selected choices.']}/>
                 </div>
                 <h2>Select which type of scale to practice</h2>
                 <form id="form" onSubmit={handleSubmit}>
