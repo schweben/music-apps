@@ -6,11 +6,11 @@
     background-color: rgba(255, 255, 255, 0.95);
     border: 2px solid #8b7355;
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    width: min(90vw, 85%);
-    max-width: 430px;
+    width: 90vw;
+    max-width: 90vw;
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: auto;
@@ -18,11 +18,11 @@
     gap: 1rem;
 }
 
-@media (max-width: 600px) {
+@media (min-width: 641px) {
     .help-panel {
-        max-width: 90vw;
-        width: 90vw;
-        padding: 1.5rem;
+        padding: 2rem;
+        width: min(90vw, 85%);
+        max-width: 430px;
     }
 }
 
