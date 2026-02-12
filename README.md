@@ -39,5 +39,5 @@ Then take the build output files from /dist
 - [ ] Circle of fifths doesn't scale properly on mobile
 - [X] Error message on running unit tests 'Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package'
 - [X] Flat symbols don't render on iOS
-- [ ] Buttons are blue on iOS
+- [X] Buttons are blue on iOS
 - [X] Scales practice does not use the same sharps and flats symbols as the rest of the application
