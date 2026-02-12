@@ -76,7 +76,9 @@ const CircleOfFifths = () => {
         lineAngles.push(lineAngles[0] + 360);
 
         // Set text style once before drawing all letters
-        ctx.font = '32px Arial';
+        const baseFontSize = 32;
+        const fontSize = baseFontSize * scale;
+        ctx.font = `${fontSize}px Arial`;
         ctx.fillStyle = '#000000';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
