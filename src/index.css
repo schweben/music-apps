@@ -106,7 +106,7 @@ nav {
 nav a {
   color: #2c1810;
   text-decoration: none;
-  padding: 0.35rem 0.6rem;
+  padding: 0.1rem 0.6rem;
   border-radius: 4px;
   transition: all 0.3s ease;
   font-weight: 500;
