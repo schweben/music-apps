@@ -1,26 +1,26 @@
 export const TRANSPOSING_INSTRUMENTS: string[] = [
     "C",
     "D",
-    "E𝄬",
+    "E♭",
     "E",
     "F",
     "A",
-    "B𝄬",
+    "B♭",
     "B"
 ];
 
 export const CHROMATIC: string[] = [
     "C",
-    "C♯/D𝄬",
+    "C♯/D♭",
     "D",
-    "D♯/E𝄬",
+    "D♯/E♭",
     "E",
     "F",
     "F♯",
     "G",
-    "G♯/A𝄬",
+    "G♯/A♭",
     "A",
-    "A♯/B𝄬",
+    "A♯/B♭",
     "B"
 ];
 
@@ -50,10 +50,10 @@ export const KEY_SIGNATURES: Record<string, string> = {
     "F♯": "6 sharp",
     "C♯": "7 sharp",
     "F": "1 flat",
-    "B𝄬": "2 flat",
-    "E𝄬": "3 flat",
-    "A𝄬": "4 flat",
-    "D𝄬": "5 flat",
-    "G𝄬": "6 flat",
-    "C𝄬": "7 flat"
+    "B♭": "2 flat",
+    "E♭": "3 flat",
+    "A♭": "4 flat",
+    "D♭": "5 flat",
+    "G♭": "6 flat",
+    "C♭": "7 flat"
 };
