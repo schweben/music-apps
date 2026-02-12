@@ -10,8 +10,8 @@ describe('Keys Constants', () => {
 
     it('should include common transposing instruments', () => {
       expect(TRANSPOSING_INSTRUMENTS).toContain('C');
-      expect(TRANSPOSING_INSTRUMENTS).toContain('B𝄬');
-      expect(TRANSPOSING_INSTRUMENTS).toContain('E𝄬');
+      expect(TRANSPOSING_INSTRUMENTS).toContain('B♭');
+      expect(TRANSPOSING_INSTRUMENTS).toContain('E♭');
       expect(TRANSPOSING_INSTRUMENTS).toContain('F');
     });
 
@@ -42,10 +42,10 @@ describe('Keys Constants', () => {
     });
 
     it('should include enharmonic equivalents', () => {
-      expect(CHROMATIC).toContain('C♯/D𝄬');
-      expect(CHROMATIC).toContain('D♯/E𝄬');
-      expect(CHROMATIC).toContain('G♯/A𝄬');
-      expect(CHROMATIC).toContain('A♯/B𝄬');
+      expect(CHROMATIC).toContain('C♯/D♭');
+      expect(CHROMATIC).toContain('D♯/E♭');
+      expect(CHROMATIC).toContain('G♯/A♭');
+      expect(CHROMATIC).toContain('A♯/B♭');
     });
 
     it('should not contain duplicates', () => {
@@ -114,12 +114,12 @@ describe('Keys Constants', () => {
 
     it('should include flat keys', () => {
       expect(KEY_SIGNATURES['F']).toBe('1 flat');
-      expect(KEY_SIGNATURES['B𝄬']).toBe('2 flat');
-      expect(KEY_SIGNATURES['E𝄬']).toBe('3 flat');
-      expect(KEY_SIGNATURES['A𝄬']).toBe('4 flat');
-      expect(KEY_SIGNATURES['D𝄬']).toBe('5 flat');
-      expect(KEY_SIGNATURES['G𝄬']).toBe('6 flat');
-      expect(KEY_SIGNATURES['C𝄬']).toBe('7 flat');
+      expect(KEY_SIGNATURES['B♭']).toBe('2 flat');
+      expect(KEY_SIGNATURES['E♭']).toBe('3 flat');
+      expect(KEY_SIGNATURES['A♭']).toBe('4 flat');
+      expect(KEY_SIGNATURES['D♭']).toBe('5 flat');
+      expect(KEY_SIGNATURES['G♭']).toBe('6 flat');
+      expect(KEY_SIGNATURES['C♭']).toBe('7 flat');
     });
 
     it('should have consistent description format', () => {
