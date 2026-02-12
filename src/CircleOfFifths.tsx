@@ -11,9 +11,14 @@ const CircleOfFifths = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
+        // Calculate responsize size
+        const isMobile = window.innerWidth <= 640;
+        const size = isMobile ? Math.min(window.innerWidth * 0.9, 400) : 600;
+        const scale = size / 600;
+
         // Set canvas size
-        canvas.width = 600;
-        canvas.height = 600;
+        canvas.width = size;
+        canvas.height = size;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
@@ -27,9 +32,9 @@ const CircleOfFifths = () => {
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
 
-        const outerRadius = 290;
-        const middleRadius = 200;
-        const innerRadius = 70;
+        const outerRadius = 290 * scale;
+        const middleRadius = 200 * scale;
+        const innerRadius = 70 * scale;
 
         // Draw outer circle
         ctx.beginPath();
