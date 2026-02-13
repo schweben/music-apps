@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MAJOR_KEYS, MINOR_KEYS } from './Fifths';
 import HelpPanel from './HelpPanel';
 
@@ -102,6 +102,32 @@ const CircleOfFifths = () => {
 
     }); // No dependency array: runs after every render
 
+    const circleClicked = (event: React.MouseEvent) => {
+        console.log(`X:${event.clientX}, Y:${event.clientY}`);
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        // Calculate responsize size
+        const isMobile = window.innerWidth <= 640;
+        const size = isMobile ? Math.min(window.innerWidth * 0.9, 400) : 600;
+        const scale = size / 600;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        const baseFontSize = 32;
+        const fontSize = baseFontSize * scale;
+        ctx.font = `${fontSize}px Arial`;
+        ctx.fillStyle = '#000000';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        ctx.fillText(`X: ${ event.clientX }, Y: ${ event.clientY }`, centerX, centerY);
+    }
+
     return (
         <div className="panel">
             <div className="panel-header">
@@ -111,7 +137,7 @@ const CircleOfFifths = () => {
                                      `The circle shows that one sharp is added to the key signature for each increasing fifth interval, by proceeding clockwise
                                       around the circle. Likewise, proceeding anti-clockwise around the circle shows that one flat is added for each increasing fourth interval.`]}/>
             </div>
-            <canvas ref={canvasRef} id="circleOfFifths"></canvas>
+            <canvas ref={canvasRef} id="circleOfFifths" onMouseDown={circleClicked}></canvas>
         </div>
     );
 }
