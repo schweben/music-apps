@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MAJOR_KEYS, MINOR_KEYS } from './Fifths';
 import HelpPanel from './HelpPanel';
+import { KEY_SIGNATURES } from './Keys';
 
 
 const CircleOfFifths = () => {
@@ -130,17 +131,12 @@ const CircleOfFifths = () => {
 
         // Display segment information in center if a segment is selected
         if (highlightedSegment !== null) {
-            ctx.fillStyle = '#000000';
             ctx.font = `14px Arial`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
 
-            const ring = highlightedSegment < 6 ? 'outer (major)' : 'inner (minor)';
-            const keyName = highlightedSegment < 6 ? MAJOR_KEYS[highlightedSegment] : MINOR_KEYS[highlightedSegment - 6];
-
-            ctx.fillText(`Segment: ${highlightedSegment}`, centerX, centerY - 20);
-            ctx.fillText(`Ring: ${ring}`, centerX, centerY);
-            ctx.fillText(`Key: ${keyName}`, centerX, centerY + 20);
+            const key = MAJOR_KEYS[highlightedSegment];
+            const keyParts = key.split("/");
+            const keySignature = KEY_SIGNATURES[keyParts.length > 1 ? keyParts[1] : keyParts[0]];
+            ctx.fillText(`${keySignature}`, centerX, centerY);
         }
     };
 
