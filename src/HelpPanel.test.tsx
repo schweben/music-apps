@@ -6,25 +6,25 @@ import HelpPanel from './HelpPanel';
 describe('HelpPanel Component', () => {
   describe('Component Rendering', () => {
     it('should render the help button', () => {
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
       const button = screen.getByRole('button', { name: /\?/i });
       expect(button).toBeInTheDocument();
     });
 
     it('should have correct CSS class on help button', () => {
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
       const button = screen.getByRole('button', { name: /\?/i });
       expect(button).toHaveClass('help-button');
     });
 
     it('should not show help panel initially', () => {
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
       const helpPanel = document.querySelector('.help-panel');
       expect(helpPanel).not.toBeInTheDocument();
     });
 
     it('should only render the help button container initially', () => {
-      const { container } = render(<HelpPanel message="Test message" />);
+      const { container } = render(<HelpPanel message={["Test message"]} />);
       const divs = container.querySelectorAll('div');
       expect(divs).toHaveLength(1);
     });
@@ -33,7 +33,7 @@ describe('HelpPanel Component', () => {
   describe('Help Button Interaction', () => {
     it('should display help panel when help button is clicked', async () => {
       const user = userEvent.setup();
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
 
       const button = screen.getByRole('button', { name: /\?/i });
       await user.click(button);
@@ -44,7 +44,7 @@ describe('HelpPanel Component', () => {
     it('should render help panel with correct message', async () => {
       const user = userEvent.setup();
       const testMessage = 'This is a help message';
-      render(<HelpPanel message={testMessage} />);
+      render(<HelpPanel message={[testMessage]} />);
 
       const button = screen.getByRole('button', { name: /\?/i });
       await user.click(button);
@@ -54,19 +54,18 @@ describe('HelpPanel Component', () => {
 
     it('should display help panel in a paragraph', async () => {
       const user = userEvent.setup();
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
 
       const button = screen.getByRole('button', { name: /\?/i });
       await user.click(button);
 
-      const paragraph = screen.getByRole('paragraph');
-      expect(paragraph).toBeInTheDocument();
-      expect(paragraph).toHaveTextContent('Test message');
+      const paragraph = screen.getByText('Test message');
+      expect(paragraph.tagName.toLowerCase()).toBe('p');
     });
 
     it('should have correct CSS class on help panel', async () => {
       const user = userEvent.setup();
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
 
       const button = screen.getByRole('button', { name: /\?/i });
       await user.click(button);
@@ -78,7 +77,7 @@ describe('HelpPanel Component', () => {
 
     it('should render close button when help panel is open', async () => {
       const user = userEvent.setup();
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
 
       const helpButton = screen.getByRole('button', { name: /\?/i });
       await user.click(helpButton);
@@ -89,7 +88,7 @@ describe('HelpPanel Component', () => {
 
     it('should have correct CSS class on close button', async () => {
       const user = userEvent.setup();
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
 
       const helpButton = screen.getByRole('button', { name: /\?/i });
       await user.click(helpButton);
@@ -102,7 +101,7 @@ describe('HelpPanel Component', () => {
   describe('Help Panel Closing', () => {
     it('should close help panel when close button is clicked', async () => {
       const user = userEvent.setup();
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
 
       const helpButton = screen.getByRole('button', { name: /\?/i });
       await user.click(helpButton);
@@ -118,7 +117,7 @@ describe('HelpPanel Component', () => {
 
     it('should not show help panel after closing', async () => {
       const user = userEvent.setup();
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
 
       const helpButton = screen.getByRole('button', { name: /\?/i });
       await user.click(helpButton);
@@ -132,7 +131,7 @@ describe('HelpPanel Component', () => {
 
     it('should allow reopening help panel after closing', async () => {
       const user = userEvent.setup();
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
 
       const helpButton = screen.getByRole('button', { name: /\?/i });
       await user.click(helpButton);
@@ -155,7 +154,7 @@ describe('HelpPanel Component', () => {
   describe('Multiple Interactions', () => {
     it('should handle multiple open and close cycles', async () => {
       const user = userEvent.setup();
-      render(<HelpPanel message="Test message" />);
+      render(<HelpPanel message={["Test message"]} />);
 
       const helpButton = screen.getByRole('button', { name: /\?/i });
 
@@ -180,7 +179,7 @@ describe('HelpPanel Component', () => {
 
     it('should display different messages when message prop changes', async () => {
       const user = userEvent.setup();
-      const { rerender } = render(<HelpPanel message="First message" />);
+      const { rerender } = render(<HelpPanel message={["First message"]} />);
 
       const helpButton = screen.getByRole('button', { name: /\?/i });
       await user.click(helpButton);
@@ -192,7 +191,7 @@ describe('HelpPanel Component', () => {
       await user.click(closeButton);
 
       // Change the message prop
-      rerender(<HelpPanel message="Second message" />);
+      rerender(<HelpPanel message={["Second message"]} />);
 
       // Open with new message
       await user.click(helpButton);
@@ -203,7 +202,7 @@ describe('HelpPanel Component', () => {
   describe('Edge Cases', () => {
     it('should handle empty message string', async () => {
       const user = userEvent.setup();
-      render(<HelpPanel message="" />);
+      render(<HelpPanel message={[""]} />);
 
       const helpButton = screen.getByRole('button', { name: /\?/i });
       await user.click(helpButton);
@@ -215,7 +214,7 @@ describe('HelpPanel Component', () => {
     it('should handle long message strings', async () => {
       const user = userEvent.setup();
       const longMessage = 'This is a very long message that contains a lot of text to test how the help panel handles longer content without breaking or causing layout issues.';
-      render(<HelpPanel message={longMessage} />);
+      render(<HelpPanel message={[longMessage]} />);
 
       const helpButton = screen.getByRole('button', { name: /\?/i });
       await user.click(helpButton);
@@ -226,7 +225,7 @@ describe('HelpPanel Component', () => {
     it('should handle special characters in message', async () => {
       const user = userEvent.setup();
       const specialMessage = 'Test with special chars: @#$%^&*()';
-      render(<HelpPanel message={specialMessage} />);
+      render(<HelpPanel message={[specialMessage]} />);
 
       const helpButton = screen.getByRole('button', { name: /\?/i });
       await user.click(helpButton);
