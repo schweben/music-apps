@@ -7,7 +7,8 @@ import HelpPanel from './HelpPanel';
 const CircleOfFifths = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-    useEffect(() => {
+    // Draws the circle of fifths on the canvas
+    const drawCircle = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -99,11 +100,15 @@ const CircleOfFifths = () => {
             const innerTextY = centerY + innerTextRadius * Math.sin(midAngleRad);
             ctx.fillText(MINOR_KEYS[i], innerTextX, innerTextY);
         }
+    };
 
-    }); // No dependency array: runs after every render
+    useEffect(() => {
+        drawCircle();
+    }, []); // Only run once on mount
 
     const circleClicked = (event: React.MouseEvent) => {
-        console.log(`X:${event.clientX}, Y:${event.clientY}`);
+        drawCircle();
+
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -118,14 +123,59 @@ const CircleOfFifths = () => {
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
 
-        const baseFontSize = 32;
-        const fontSize = baseFontSize * scale;
-        ctx.font = `${fontSize}px Arial`;
+        // Get click position relative to canvas
+        const rect = canvas.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const clickY = event.clientY - rect.top;
+
+        // Calculate distance from center
+        const dx = clickX - centerX;
+        const dy = clickY - centerY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // Calculate angle from center (in degrees, with 0 at top, clockwise)
+        let angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        angle = (angle + 90 + 360) % 360; // Convert to 0-360 range with 0 at top
+
+        // Determine which segment (0-11)
+        const segmentAngle = 30;
+        const segmentNumber = Math.floor((angle + segmentAngle / 2) / segmentAngle) % 12;
+
+        // Define radii
+        const outerRadius = 290 * scale;
+        const middleRadius = 200 * scale;
+        const innerRadius = 70 * scale;
+
+        // Determine which ring was clicked
+        let ring = '';
+        if (distance < innerRadius) {
+            ring = 'center';
+        } else if (distance < middleRadius) {
+            ring = 'inner (minor)';
+        } else if (distance < outerRadius) {
+            ring = 'outer (major)';
+        } else {
+            ring = 'outside circle';
+        }
+
+        // Get key name based on segment and ring
+        let keyName = '';
+        if (ring === 'inner (minor)') {
+            keyName = segmentNumber == 0 ? MINOR_KEYS[MINOR_KEYS.length - 1] : MINOR_KEYS[segmentNumber - 1];
+        } else if (ring === 'outer (major)') {
+            keyName = segmentNumber == 0 ? MAJOR_KEYS[MAJOR_KEYS.length - 1] : MAJOR_KEYS[segmentNumber - 1];
+        }
+
+        // Display segment information
         ctx.fillStyle = '#000000';
+        ctx.font = `14px Arial`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-
-        ctx.fillText(`X: ${ event.clientX }, Y: ${ event.clientY }`, centerX, centerY);
+        ctx.fillText(`Segment: ${segmentNumber}`, centerX, centerY - 20);
+        ctx.fillText(`Ring: ${ring}`, centerX, centerY);
+        if (keyName) {
+            ctx.fillText(`Key: ${keyName}`, centerX, centerY + 20);
+        }
     }
 
     return (
