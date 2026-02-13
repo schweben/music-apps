@@ -112,7 +112,12 @@ const Transpose = () => {
         <div className="panel">
             <div className="panel-header">
                 <h1>Transposition</h1>
-                <HelpPanel message={['This allows the user to select a source instrument key (e.g. a C trumpet) and a target instrument key (e.g. a B♭ trumpet) and then transpose a key signature and/or a specific note from the source to the target']}/>
+                <HelpPanel message={[`Select the 'Source instrument key'. This is the key of the instrument that you want to transpose
+                                      from (e.g. a C trumpet). Then select the 'Target instrument key' which is the the key of the
+                                      instrument that you want to transpose too (e.g. a B♭ trumpet).`,
+                                      `You can set a 'Source key signature' and/or a specific 'Source note'. The transposed values for
+                                      both will be displayed by pressing the 'Transpose' button.`,
+                                      `The transposition interval will also be displayed when the 'Transpose' button is pressed.`]}/>
             </div>
             <form id="form" onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -125,10 +130,10 @@ const Transpose = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="targetInstrument">Target instrument key:</label>
-                        <select id="targetInstrument" name="targetInstrument" defaultValue="C" onChange={clearValues}>
-                        {TRANSPOSING_INSTRUMENTS.map((instrument) => (
-                            <option key={instrument} value={instrument}>{instrument}</option>
-                        ))}
+                    <select id="targetInstrument" name="targetInstrument" defaultValue="C" onChange={clearValues}>
+                    {TRANSPOSING_INSTRUMENTS.map((instrument) => (
+                        <option key={instrument} value={instrument}>{instrument}</option>
+                    ))}
                     </select>
                 </div>
                 <div className="form-group">
