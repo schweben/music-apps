@@ -1,14 +1,15 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MAJOR_KEYS, MINOR_KEYS } from './Fifths';
 import HelpPanel from './HelpPanel';
 
 
 const CircleOfFifths = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const [selectedSegment, setSelectedSegment] = useState<number | null>(null);
 
     // Draws the circle of fifths on the canvas
-    const drawCircle = () => {
+    const drawCircle = (highlightedSegment: number | null = null) => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -76,6 +77,32 @@ const CircleOfFifths = () => {
         // Add the first angle + 360 to close the circle for the last segment
         lineAngles.push(lineAngles[0] + 360);
 
+        // Draw highlighted segment if one is selected
+        if (highlightedSegment !== null) {
+            const angle1 = lineAngles[highlightedSegment];
+            const angle2 = lineAngles[highlightedSegment + 1];
+            const angle1Rad = (angle1 - 90) * Math.PI / 180;
+            const angle2Rad = (angle2 - 90) * Math.PI / 180;
+
+            // Draw outer ring segment
+            ctx.fillStyle = 'rgba(255, 200, 0, 0.4)';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, outerRadius, angle1Rad, angle2Rad);
+            ctx.lineTo(centerX + middleRadius * Math.cos(angle2Rad), centerY + middleRadius * Math.sin(angle2Rad));
+            ctx.arc(centerX, centerY, middleRadius, angle2Rad, angle1Rad, true);
+            ctx.closePath();
+            ctx.fill();
+
+            // Draw inner ring segment
+            ctx.fillStyle = 'rgba(255, 200, 0, 0.5)';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, middleRadius, angle1Rad, angle2Rad);
+            ctx.lineTo(centerX + innerRadius * Math.cos(angle2Rad), centerY + innerRadius * Math.sin(angle2Rad));
+            ctx.arc(centerX, centerY, innerRadius, angle2Rad, angle1Rad, true);
+            ctx.closePath();
+            ctx.fill();
+        }
+
         // Set text style once before drawing all letters
         const baseFontSize = 32;
         const fontSize = baseFontSize * scale;
@@ -100,38 +127,42 @@ const CircleOfFifths = () => {
             const innerTextY = centerY + innerTextRadius * Math.sin(midAngleRad);
             ctx.fillText(MINOR_KEYS[i], innerTextX, innerTextY);
         }
+
+        // Display segment information in center if a segment is selected
+        if (highlightedSegment !== null) {
+            ctx.fillStyle = '#000000';
+            ctx.font = `14px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            const ring = highlightedSegment < 6 ? 'outer (major)' : 'inner (minor)';
+            const keyName = highlightedSegment < 6 ? MAJOR_KEYS[highlightedSegment] : MINOR_KEYS[highlightedSegment - 6];
+
+            ctx.fillText(`Segment: ${highlightedSegment}`, centerX, centerY - 20);
+            ctx.fillText(`Ring: ${ring}`, centerX, centerY);
+            ctx.fillText(`Key: ${keyName}`, centerX, centerY + 20);
+        }
     };
 
     useEffect(() => {
-        drawCircle();
-    }, []); // Only run once on mount
+        drawCircle(selectedSegment);
+    }, [selectedSegment]); // Redraw when selectedSegment changes
 
     const circleClicked = (event: React.MouseEvent) => {
-        drawCircle();
-
         const canvas = canvasRef.current;
         if (!canvas) return;
-
-        // Calculate responsize size
-        const isMobile = window.innerWidth <= 640;
-        const size = isMobile ? Math.min(window.innerWidth * 0.9, 400) : 600;
-        const scale = size / 600;
-
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
 
         // Get click position relative to canvas
         const rect = canvas.getBoundingClientRect();
         const clickX = event.clientX - rect.left;
         const clickY = event.clientY - rect.top;
 
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
         // Calculate distance from center
         const dx = clickX - centerX;
         const dy = clickY - centerY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
 
         // Calculate angle from center (in degrees, with 0 at top, clockwise)
         let angle = Math.atan2(dy, dx) * 180 / Math.PI;
@@ -139,43 +170,10 @@ const CircleOfFifths = () => {
 
         // Determine which segment (0-11)
         const segmentAngle = 30;
-        const segmentNumber = Math.floor((angle + segmentAngle / 2) / segmentAngle) % 12;
+        const segmentNumber = Math.floor((angle + 345) / segmentAngle) % 12;
 
-        // Define radii
-        const outerRadius = 290 * scale;
-        const middleRadius = 200 * scale;
-        const innerRadius = 70 * scale;
-
-        // Determine which ring was clicked
-        let ring = '';
-        if (distance < innerRadius) {
-            ring = 'center';
-        } else if (distance < middleRadius) {
-            ring = 'inner (minor)';
-        } else if (distance < outerRadius) {
-            ring = 'outer (major)';
-        } else {
-            ring = 'outside circle';
-        }
-
-        // Get key name based on segment and ring
-        let keyName = '';
-        if (ring === 'inner (minor)') {
-            keyName = segmentNumber == 0 ? MINOR_KEYS[MINOR_KEYS.length - 1] : MINOR_KEYS[segmentNumber - 1];
-        } else if (ring === 'outer (major)') {
-            keyName = segmentNumber == 0 ? MAJOR_KEYS[MAJOR_KEYS.length - 1] : MAJOR_KEYS[segmentNumber - 1];
-        }
-
-        // Display segment information
-        ctx.fillStyle = '#000000';
-        ctx.font = `14px Arial`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(`Segment: ${segmentNumber}`, centerX, centerY - 20);
-        ctx.fillText(`Ring: ${ring}`, centerX, centerY);
-        if (keyName) {
-            ctx.fillText(`Key: ${keyName}`, centerX, centerY + 20);
-        }
+        // Set the selected segment to highlight it
+        setSelectedSegment(segmentNumber);
     }
 
     return (
