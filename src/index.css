@@ -125,10 +125,6 @@ nav a.active {
 }
 
 @media (min-width: 641px) {
-  body {
-    background-position-x: center;
-  }
-
   h1 {
     font-size: 2.25em;
     line-height: 1.1;
