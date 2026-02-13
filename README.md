@@ -31,7 +31,8 @@ Then take the build output files from /dist
 - [X] Add circle of fifths
 - [X] Display test results on dashboard
 - [X] Display code coverage on dashboard
-- [ ] Improve help text
+- [X] Improve help text
+- [ ] Display key signatures on circle of fifths
 
 ## Bugs
 

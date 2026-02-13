@@ -166,7 +166,7 @@ const Transpose = () => {
                         <h3 className={transposedNote ? '' : 'hidden'}>Transposed note: {transposedNote}</h3>
                     </>
                 ) : (
-                    <h2>No transposition needed, keys are in unison</h2>
+                    <h3>No transposition needed, keys are in unison</h3>
                 )}
             </div>
         )}
