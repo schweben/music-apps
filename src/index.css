@@ -29,8 +29,8 @@ h2 {
 h3 {
   font-size: 1.1em;
   line-height: 1.2;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
 }
 
 button {
@@ -185,6 +185,15 @@ nav a.active {
   border-radius: 8px;
   background-color: rgb(210, 181, 140);
   opacity: 0.7;
+  display: flow-root;
+}
+
+.panel > *:first-child {
+  margin-top: 0;
+}
+
+.panel > h3:first-child {
+  margin-top: 0.5rem;
 }
 
 .panel-header {
