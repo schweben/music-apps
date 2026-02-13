@@ -72,8 +72,9 @@ const ScalesPractice = () => {
                 <div className="panel-header">
                     <h1>Scales Practice</h1>
                     <HelpPanel message={[`Select one or more scale types to practice from the list and press the 'Get a scale' button. The app will then randomly
-                                          choose a scale of those types for you to practice`,
-                                          `If you can't remember the key signature for the scale press the 'Show key' button and the key will be displayed`]}/>
+                                          choose a scale of those types for you to practice.`,
+                                          `If you can't remember the key signature for the scale press the 'Show key' button and the key will be displayed. Pressing
+                                          the button a second time will hide the key signature again.`]}/>
                 </div>
                 <h2>Select which type of scale to practice</h2>
                 <form id="form" onSubmit={handleSubmit}>
