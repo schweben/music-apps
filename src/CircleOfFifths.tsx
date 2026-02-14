@@ -35,6 +35,13 @@ const CircleOfFifths = () => {
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
 
+        // Set text style once before drawing all letters
+        const baseFontSize = 32;
+        const fontSize = baseFontSize * scale;
+        ctx.font = `${fontSize}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
         const outerRadius = 290 * scale;
         const middleRadius = 200 * scale;
         const innerRadius = 70 * scale;
@@ -86,7 +93,7 @@ const CircleOfFifths = () => {
             const angle2Rad = (angle2 - 90) * Math.PI / 180;
 
             // Draw outer ring segment
-            ctx.fillStyle = 'rgba(255, 200, 0, 0.4)';
+            ctx.fillStyle = 'rgba(255, 200, 0, 0.5)';
             ctx.beginPath();
             ctx.arc(centerX, centerY, outerRadius, angle1Rad, angle2Rad);
             ctx.lineTo(centerX + middleRadius * Math.cos(angle2Rad), centerY + middleRadius * Math.sin(angle2Rad));
@@ -95,23 +102,28 @@ const CircleOfFifths = () => {
             ctx.fill();
 
             // Draw inner ring segment
-            ctx.fillStyle = 'rgba(255, 200, 0, 0.5)';
             ctx.beginPath();
             ctx.arc(centerX, centerY, middleRadius, angle1Rad, angle2Rad);
             ctx.lineTo(centerX + innerRadius * Math.cos(angle2Rad), centerY + innerRadius * Math.sin(angle2Rad));
             ctx.arc(centerX, centerY, innerRadius, angle2Rad, angle1Rad, true);
             ctx.closePath();
             ctx.fill();
+
+            // Fill the centre circle
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, innerRadius, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Display key signature in center
+            const key = MAJOR_KEYS[highlightedSegment];
+            const keyParts = key.split("/");
+            const keySignature = KEY_SIGNATURES[keyParts.length > 1 ? keyParts[1] : keyParts[0]];
+            ctx.fillStyle = '#000000';
+            ctx.fillText(`${keySignature}`, centerX, centerY);
         }
 
-        // Set text style once before drawing all letters
-        const baseFontSize = 32;
-        const fontSize = baseFontSize * scale;
-        ctx.font = `${fontSize}px Arial`;
+        // Set text color and draw key names in the middle of each segment
         ctx.fillStyle = '#000000';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-
         for (let i = 0; i < segmentCount; i++) {
             // Midpoint angle between two lines
             const angle1 = lineAngles[i];
@@ -128,16 +140,6 @@ const CircleOfFifths = () => {
             const innerTextY = centerY + innerTextRadius * Math.sin(midAngleRad);
             ctx.fillText(MINOR_KEYS[i], innerTextX, innerTextY);
         }
-
-        // Display segment information in center if a segment is selected
-        if (highlightedSegment !== null) {
-            ctx.font = `14px Arial`;
-
-            const key = MAJOR_KEYS[highlightedSegment];
-            const keyParts = key.split("/");
-            const keySignature = KEY_SIGNATURES[keyParts.length > 1 ? keyParts[1] : keyParts[0]];
-            ctx.fillText(`${keySignature}`, centerX, centerY);
-        }
     };
 
     useEffect(() => {
@@ -147,6 +149,12 @@ const CircleOfFifths = () => {
     const circleClicked = (event: React.MouseEvent) => {
         const canvas = canvasRef.current;
         if (!canvas) return;
+
+        // If a segment is already selected, deselect it and return
+        if (selectedSegment !== null) {
+            setSelectedSegment(null);
+            return;
+        }
 
         // Get click position relative to canvas
         const rect = canvas.getBoundingClientRect();
