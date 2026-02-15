@@ -1,9 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { MAJOR_KEYS, MINOR_KEYS } from './Fifths';
+import { KEY_SIGNATURES, MAJOR_KEYS, MINOR_KEYS } from './Fifths';
 import HelpPanel from './HelpPanel';
-import { KEY_SIGNATURES } from './Keys';
-
 
 const CircleOfFifths = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -116,8 +114,7 @@ const CircleOfFifths = () => {
 
             // Display key signature in center
             const key = MAJOR_KEYS[highlightedSegment];
-            const keyParts = key.split("/");
-            const keySignature = KEY_SIGNATURES[keyParts.length > 1 ? keyParts[1] : keyParts[0]];
+            const keySignature = KEY_SIGNATURES[key];
             ctx.fillStyle = '#000000';
             ctx.fillText(`${keySignature}`, centerX, centerY);
         }
