@@ -168,9 +168,8 @@ const CircleOfFifths = () => {
         const segmentNumber = Math.floor((angle + 345) / segmentAngle) % 12;
 
 
-        // If a segment is already selected, deselect it and return
+        // If the clicked segment is already selected, deselect it and return
         if (selectedSegment !== null && selectedSegment === segmentNumber) {
-            console.log(`Deselected segment ${selectedSegment}`);
             setSelectedSegment(null);
             return;
         }
