@@ -33,6 +33,7 @@ Then take the build output files from /dist
 - [X] Display code coverage on dashboard
 - [X] Improve help text
 - [ ] Display key signatures on circle of fifths
+- [ ] Consolidate constants
 
 ## Bugs
 

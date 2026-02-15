@@ -150,12 +150,6 @@ const CircleOfFifths = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        // If a segment is already selected, deselect it and return
-        if (selectedSegment !== null) {
-            setSelectedSegment(null);
-            return;
-        }
-
         // Get click position relative to canvas
         const rect = canvas.getBoundingClientRect();
         const clickX = event.clientX - rect.left;
@@ -175,6 +169,14 @@ const CircleOfFifths = () => {
         // Determine which segment (0-11)
         const segmentAngle = 30;
         const segmentNumber = Math.floor((angle + 345) / segmentAngle) % 12;
+
+
+        // If a segment is already selected, deselect it and return
+        if (selectedSegment !== null && selectedSegment === segmentNumber) {
+            console.log(`Deselected segment ${selectedSegment}`);
+            setSelectedSegment(null);
+            return;
+        }
 
         // Set the selected segment to highlight it
         setSelectedSegment(segmentNumber);
