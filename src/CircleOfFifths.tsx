@@ -185,7 +185,8 @@ const CircleOfFifths = () => {
                 <HelpPanel message={[`The circle of fifths is a way of visualising all major keys and minor keys. The major keys are in the outer circle and their
                                       relative minor keys are in the inner circle.`,
                                      `The circle shows that one sharp is added to the key signature for each increasing fifth interval, by proceeding clockwise
-                                      around the circle. Likewise, proceeding anti-clockwise around the circle shows that one flat is added for each increasing fourth interval.`]}/>
+                                      around the circle. Likewise, proceeding anti-clockwise around the circle shows that one flat is added for each increasing fourth interval.`,
+                                      `Clicking on a segment of the circle will display the key signature associated with the key in that segment`]}/>
             </div>
             <canvas ref={canvasRef} id="circleOfFifths" onMouseDown={circleClicked}></canvas>
         </div>
