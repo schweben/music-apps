@@ -59,13 +59,30 @@ export const KEY_SIGNATURES: Record<string, string> = {
 };
 
 export class MajorKey {
+
+    static readonly C: MajorKey = new MajorKey('C', 0, 0, 'A');
+    static readonly G = new MajorKey('G', 1, 0, 'E');
+    static readonly D = new MajorKey('D', 2, 0, 'B');
+    static readonly A = new MajorKey('A', 3, 0, 'F♯');
+    static readonly E = new MajorKey('E', 4, 0, 'C♯');
+    static readonly B = new MajorKey('B', 5, 0, 'G♯');
+    static readonly F_SHARP= new MajorKey('F♯', 6, 0, 'D♯');
+    static readonly C_SHARP = new MajorKey('C♯', 7, 0, 'A♯');
+    static readonly F = new MajorKey('F', 0, 1, 'D');
+    static readonly B_FLAT = new MajorKey('B♭', 0, 2, 'G');
+    static readonly E_FLAT = new MajorKey('E♭', 0, 3, 'C');
+    static readonly A_FLAT = new MajorKey('A♭', 0, 4, 'F');
+    static readonly D_FLAT = new MajorKey('D♭', 0, 5, 'B♭');
+    static readonly G_FLAT = new MajorKey('G♭', 0, 6, 'E♭');
+    static readonly C_FLAT = new MajorKey('C♭', 0, 7, 'A♭');
+
     private readonly name: string;
     private readonly sharps: number;
     private readonly flats: number;
     private readonly enharmonic: string | undefined;
     private readonly relativeMinor: string;
 
-    constructor(name: string, sharps: number, flats: number, relativeMinor: string, enharmonic?: string) {
+    private constructor(name: string, sharps: number, flats: number, relativeMinor: string, enharmonic?: string) {
         this.name = name;
         this.sharps = sharps;
         this.flats = flats;
@@ -98,20 +115,3 @@ export class MajorKey {
         }
     }
 }
-
-export const MAJOR_KEYS: MajorKey[] = [
-    new MajorKey('C', 0, 0, 'A'),
-    new MajorKey('G', 1, 0, 'E')
-    new MajorKey('D', 1, 0, 'E')
-    new MajorKey('A', 1, 0, 'E')
-    new MajorKey('E', 1, 0, 'E')
-    new MajorKey('B', 1, 0, 'E')
-    new MajorKey('G', 1, 0, 'E')
-    new MajorKey('G', 1, 0, 'E')
-    new MajorKey('G', 1, 0, 'E')
-    new MajorKey('G', 1, 0, 'E')
-    new MajorKey('G', 1, 0, 'E')
-    new MajorKey('G', 1, 0, 'E')
-    new MajorKey('G', 1, 0, 'E')
-
-];
