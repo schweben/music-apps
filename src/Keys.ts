@@ -119,6 +119,12 @@ export class MajorKey {
         }
     }
 
+    static getKeySignatures(): Record<string, string> {
+        return {
+            this.C.getName(): this.C.getKeySignature()
+        }
+    }
+
     static getFullChromatics(): string[] {
         return [
             this.C.getEnharmonicName(),
