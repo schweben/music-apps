@@ -67,12 +67,12 @@ export class MajorKey {
     static readonly E = new MajorKey('E', 4, 0, 'C♯');
     static readonly B = new MajorKey('B', 5, 0, 'G♯');
     static readonly F_SHARP= new MajorKey('F♯', 6, 0, 'D♯');
-    static readonly C_SHARP = new MajorKey('C♯', 7, 0, 'A♯');
+    static readonly C_SHARP = new MajorKey('C♯', 7, 0, 'A♯', 'D♭');
     static readonly F = new MajorKey('F', 0, 1, 'D');
-    static readonly B_FLAT = new MajorKey('B♭', 0, 2, 'G');
-    static readonly E_FLAT = new MajorKey('E♭', 0, 3, 'C');
-    static readonly A_FLAT = new MajorKey('A♭', 0, 4, 'F');
-    static readonly D_FLAT = new MajorKey('D♭', 0, 5, 'B♭');
+    static readonly B_FLAT = new MajorKey('B♭', 0, 2, 'G', 'A♯');
+    static readonly E_FLAT = new MajorKey('E♭', 0, 3, 'C', 'D♯');
+    static readonly A_FLAT = new MajorKey('A♭', 0, 4, 'F', 'G♯');
+    static readonly D_FLAT = new MajorKey('D♭', 0, 5, 'B♭', 'C♯');
     static readonly G_FLAT = new MajorKey('G♭', 0, 6, 'E♭');
     static readonly C_FLAT = new MajorKey('C♭', 0, 7, 'A♭');
 
@@ -94,6 +94,10 @@ export class MajorKey {
         return this.name;
     }
 
+    public getEnharmonicName(): string {
+        return this.enharmonic ? `${this.name}/${this.enharmonic}` : this.name;
+    }
+
     public getRelativeMinor(): string {
         return this.relativeMinor;
     }
@@ -113,5 +117,22 @@ export class MajorKey {
         } else {
             return '';
         }
+    }
+
+    static getFullChromatics(): string[] {
+        return [
+            this.C.getEnharmonicName(),
+            this.C_SHARP.getEnharmonicName(),
+            this.D.getEnharmonicName(),
+            this.E_FLAT.getEnharmonicName(),
+            this.E.getEnharmonicName(),
+            this.F.getEnharmonicName(),
+            this.F_SHARP.getEnharmonicName(),
+            this.G.getEnharmonicName(),
+            this.A_FLAT.getEnharmonicName(),
+            this.A.getEnharmonicName(),
+            this.B_FLAT.getEnharmonicName(),
+            this.B.getEnharmonicName()
+        ];
     }
 }
