@@ -57,3 +57,61 @@ export const KEY_SIGNATURES: Record<string, string> = {
     "G♭": "6 flat",
     "C♭": "7 flat"
 };
+
+export class MajorKey {
+    private readonly name: string;
+    private readonly sharps: number;
+    private readonly flats: number;
+    private readonly enharmonic: string | undefined;
+    private readonly relativeMinor: string;
+
+    constructor(name: string, sharps: number, flats: number, relativeMinor: string, enharmonic?: string) {
+        this.name = name;
+        this.sharps = sharps;
+        this.flats = flats;
+        this.relativeMinor = relativeMinor;
+        this.enharmonic = enharmonic;
+    }
+
+    public getName(): string {
+        return this.name;
+    }
+
+    public getRelativeMinor(): string {
+        return this.relativeMinor;
+    }
+
+    public getEnharmonic(): string | undefined {
+        return this.enharmonic;
+    }
+
+    public getKeySignature(): string | null {
+        if (this.sharps === undefined || this.flats === undefined) {
+            return null;
+        }
+        if (this.sharps > 0) {
+            return `${this.sharps}♯`;
+        } else if (this.flats > 0) {
+            return `${this.flats}♭`;
+        } else {
+            return '';
+        }
+    }
+}
+
+export const MAJOR_KEYS: MajorKey[] = [
+    new MajorKey('C', 0, 0, 'A'),
+    new MajorKey('G', 1, 0, 'E')
+    new MajorKey('D', 1, 0, 'E')
+    new MajorKey('A', 1, 0, 'E')
+    new MajorKey('E', 1, 0, 'E')
+    new MajorKey('B', 1, 0, 'E')
+    new MajorKey('G', 1, 0, 'E')
+    new MajorKey('G', 1, 0, 'E')
+    new MajorKey('G', 1, 0, 'E')
+    new MajorKey('G', 1, 0, 'E')
+    new MajorKey('G', 1, 0, 'E')
+    new MajorKey('G', 1, 0, 'E')
+    new MajorKey('G', 1, 0, 'E')
+
+];
