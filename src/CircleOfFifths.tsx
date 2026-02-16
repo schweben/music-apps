@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { KEY_SIGNATURES, MAJOR_KEYS, MINOR_KEYS } from './Fifths';
 import HelpPanel from './HelpPanel';
+import { MajorKey } from './Keys';
 
 const CircleOfFifths = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -113,8 +113,8 @@ const CircleOfFifths = () => {
             ctx.fill();
 
             // Display key signature in center
-            const key = MAJOR_KEYS[highlightedSegment];
-            const keySignature = KEY_SIGNATURES[key];
+            const key = MajorKey.getMajorKeysForCircleOfFifths()[highlightedSegment];
+            const keySignature = MajorKey.getDualKeySignature(key);
             ctx.fillStyle = '#000000';
             ctx.fillText(`${keySignature}`, centerX, centerY);
         }
@@ -130,12 +130,12 @@ const CircleOfFifths = () => {
             const outerTextRadius = (middleRadius + outerRadius) / 2;
             const outerTextX = centerX + outerTextRadius * Math.cos(midAngleRad);
             const outerTextY = centerY + outerTextRadius * Math.sin(midAngleRad);
-            ctx.fillText(MAJOR_KEYS[i], outerTextX, outerTextY);
+            ctx.fillText(MajorKey.getMajorKeysForCircleOfFifths()[i], outerTextX, outerTextY);
 
             const innerTextRadius = (innerRadius + middleRadius) / 2;
             const innerTextX = centerX + innerTextRadius * Math.cos(midAngleRad);
             const innerTextY = centerY + innerTextRadius * Math.sin(midAngleRad);
-            ctx.fillText(MINOR_KEYS[i], innerTextX, innerTextY);
+            ctx.fillText(MajorKey.getMinorKeys()[i], innerTextX, innerTextY);
         }
     };
 

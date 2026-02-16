@@ -2,8 +2,8 @@ import { MajorKey } from "./Keys";
 
 export class Scale {
     private readonly name: string;
-    private readonly key: MajorKey | undefined;
     private readonly range: string;
+    private readonly key: MajorKey | undefined;
 
     constructor(name: string, range: string, key?: MajorKey) {
         this.name = name;

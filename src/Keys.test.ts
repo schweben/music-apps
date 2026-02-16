@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { TRANSPOSING_INSTRUMENTS, CHROMATIC, INTERVALS, KEY_SIGNATURES, MajorKey } from './Keys';
+import { TRANSPOSING_INSTRUMENTS, INTERVALS, MajorKey } from './Keys';
 
 describe('Keys Constants', () => {
   describe('TRANSPOSING_INSTRUMENTS', () => {
@@ -203,6 +203,79 @@ describe('Keys Constants', () => {
         expect(keySignatures['D♭']).toBe('5♭');
         expect(keySignatures['G♭']).toBe('6♭');
         expect(keySignatures['C♭']).toBe('7♭');
+      });
+
+      it('should return the key signature for a given key name', () => {
+        expect(MajorKey.getKeySignature('C')).toBe('No ♯ or ♭');
+        expect(MajorKey.getKeySignature('G')).toBe('1♯');
+        expect(MajorKey.getKeySignature('D')).toBe('2♯');
+        expect(MajorKey.getKeySignature('A')).toBe('3♯');
+        expect(MajorKey.getKeySignature('E')).toBe('4♯');
+        expect(MajorKey.getKeySignature('B')).toBe('5♯');
+        expect(MajorKey.getKeySignature('F♯')).toBe('6♯');
+        expect(MajorKey.getKeySignature('C♯')).toBe('7♯');
+        expect(MajorKey.getKeySignature('F')).toBe('1♭');
+        expect(MajorKey.getKeySignature('B♭')).toBe('2♭');
+        expect(MajorKey.getKeySignature('E♭')).toBe('3♭');
+        expect(MajorKey.getKeySignature('A♭')).toBe('4♭');
+        expect(MajorKey.getKeySignature('D♭')).toBe('5♭');
+        expect(MajorKey.getKeySignature('G♭')).toBe('6♭');
+        expect(MajorKey.getKeySignature('C♭')).toBe('7♭');
+      });
+
+      it('should return a list of major keys', () => {
+        const majorKeys: string[] = MajorKey.getMajorKeys();
+        expect(majorKeys.length).toBe(12);
+        expect(majorKeys[0]).toBe('G');
+        expect(majorKeys[1]).toBe('D');
+        expect(majorKeys[2]).toBe('A');
+        expect(majorKeys[3]).toBe('E');
+        expect(majorKeys[4]).toBe('B');
+        expect(majorKeys[5]).toBe('F♯');
+        expect(majorKeys[6]).toBe('D♭');
+        expect(majorKeys[7]).toBe('A♭');
+        expect(majorKeys[8]).toBe('E♭');
+        expect(majorKeys[9]).toBe('B♭');
+        expect(majorKeys[10]).toBe('F');
+        expect(majorKeys[11]).toBe('C');
+      });
+
+      it('should return a list of minor keys', () => {
+        const minorKeys: string[] = MajorKey.getMinorKeys();
+        expect(minorKeys.length).toBe(12);
+        expect(minorKeys[0]).toBe('E');
+        expect(minorKeys[1]).toBe('B');
+        expect(minorKeys[2]).toBe('F♯');
+        expect(minorKeys[3]).toBe('C♯');
+        expect(minorKeys[4]).toBe('G♯');
+        expect(minorKeys[5]).toBe('D♯');
+        expect(minorKeys[6]).toBe('B♭');
+        expect(minorKeys[7]).toBe('F');
+        expect(minorKeys[8]).toBe('C');
+        expect(minorKeys[9]).toBe('G');
+        expect(minorKeys[10]).toBe('D');
+        expect(minorKeys[11]).toBe('A');
+      });
+
+      it('should return enharmonic key signatures where necessary', () => {
+        expect(MajorKey.getDualKeySignature('C')).toBe('No ♯ or ♭');
+        expect(MajorKey.getDualKeySignature('G')).toBe('1♯');
+        expect(MajorKey.getDualKeySignature('D')).toBe('2♯');
+        expect(MajorKey.getDualKeySignature('A')).toBe('3♯');
+        expect(MajorKey.getDualKeySignature('E')).toBe('4♯');
+        expect(MajorKey.getDualKeySignature('B/C♭')).toBe('5♯/7♭');
+        expect(MajorKey.getDualKeySignature('B')).toBe('5♯');
+        expect(MajorKey.getDualKeySignature('C♭')).toBe('7♭');
+        expect(MajorKey.getDualKeySignature('F♯/G♭')).toBe('6♯/6♭');
+        expect(MajorKey.getDualKeySignature('F♯')).toBe('6♯');
+        expect(MajorKey.getDualKeySignature('G♭')).toBe('6♭');
+        expect(MajorKey.getDualKeySignature('D♭/C♯')).toBe('5♭/7♯');
+        expect(MajorKey.getDualKeySignature('D♭')).toBe('5♭');
+        expect(MajorKey.getDualKeySignature('C♯')).toBe('7♯');
+        expect(MajorKey.getDualKeySignature('A♭')).toBe('4♭');
+        expect(MajorKey.getDualKeySignature('E♭')).toBe('3♭');
+        expect(MajorKey.getDualKeySignature('B♭')).toBe('2♭');
+        expect(MajorKey.getDualKeySignature('F')).toBe('1♭');
       });
     });
   });

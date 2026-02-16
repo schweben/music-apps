@@ -86,6 +86,17 @@ export class MajorKey {
         }
     }
 
+    static getKeySignature(keyName: string): string {
+        return this.getKeySignatures()[keyName];
+    }
+
+    static getDualKeySignature(keyName: string): string {
+        const keySignatures = keyName.split('/').map(part => {
+            return this.getKeySignature(part);
+        });
+        return keySignatures.join('/');
+    }
+
     static getKeySignatures(): Record<string, string> {
         return {
             [this.C.getName()]: this.C.getKeySignature(),
@@ -120,6 +131,56 @@ export class MajorKey {
             this.A.getEnharmonicName(),
             this.B_FLAT.getEnharmonicName(),
             this.B.getEnharmonicName()
+        ];
+    }
+
+    static getMajorKeys(): string[] {
+        return [
+            this.G.getName(),
+            this.D.getName(),
+            this.A.getName(),
+            this.E.getName(),
+            this.B.getName(),
+            this.F_SHARP.getName(),
+            this.D_FLAT.getName(),
+            this.A_FLAT.getName(),
+            this.E_FLAT.getName(),
+            this.B_FLAT.getName(),
+            this.F.getName(),
+            this.C.getName()
+        ];
+    }
+
+    static getMajorKeysForCircleOfFifths(): string[] {
+        return [
+            this.G.getName(),
+            this.D.getName(),
+            this.A.getName(),
+            this.E.getName(),
+            this.B.getName() + "/" + this.C_FLAT.getName(),
+            this.F_SHARP.getName() + "/" + this.G_FLAT.getName(),
+            this.D_FLAT.getName() + "/" + this.C_SHARP.getName(),
+            this.A_FLAT.getName(),
+            this.E_FLAT.getName(),
+            this.B_FLAT.getName(),
+            this.F.getName(),
+            this.C.getName()
+        ];
+    }
+    static getMinorKeys(): string[] {
+        return [
+            this.G.getRelativeMinor(),
+            this.D.getRelativeMinor(),
+            this.A.getRelativeMinor(),
+            this.E.getRelativeMinor(),
+            this.B.getRelativeMinor(),
+            this.F_SHARP.getRelativeMinor(),
+            this.D_FLAT.getRelativeMinor(),
+            this.A_FLAT.getRelativeMinor(),
+            this.E_FLAT.getRelativeMinor(),
+            this.B_FLAT.getRelativeMinor(),
+            this.F.getRelativeMinor(),
+            this.C.getRelativeMinor()
         ];
     }
 }
