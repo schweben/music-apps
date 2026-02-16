@@ -36,7 +36,7 @@ const CircleOfFifths = () => {
         // Set text style once before drawing all letters
         const baseFontSize = 32;
         const fontSize = baseFontSize * scale;
-        ctx.font = `${fontSize}px Arial`;
+        ctx.font = `${fontSize}px Noto Sans`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
