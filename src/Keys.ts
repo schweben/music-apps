@@ -106,9 +106,9 @@ export class MajorKey {
         return this.enharmonic;
     }
 
-    public getKeySignature(): string | null {
+    public getKeySignature(): string {
         if (this.sharps === undefined || this.flats === undefined) {
-            return null;
+            return '';
         }
         if (this.sharps > 0) {
             return `${this.sharps}♯`;
@@ -121,7 +121,7 @@ export class MajorKey {
 
     static getKeySignatures(): Record<string, string> {
         return {
-            this.C.getName(): this.C.getKeySignature()
+            [this.C.getName()]: this.C.getKeySignature()
         }
     }
 
