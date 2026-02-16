@@ -1,6 +1,6 @@
 import './Transpose.css';
 import React, { useState } from 'react';
-import { CHROMATIC, INTERVALS, MajorKey, TRANSPOSING_INSTRUMENTS } from './Keys';
+import { INTERVALS, MajorKey, TRANSPOSING_INSTRUMENTS } from './Keys';
 import HelpPanel from './HelpPanel';
 
 const Transpose = () => {
@@ -38,20 +38,21 @@ const Transpose = () => {
     };
 
     const getNoteIndex = (note: string): number => {
-        const result = CHROMATIC.find(chromatic => {
+        const chromatic = MajorKey.getFullChromatics();
+        const result = chromatic.find(chromatic => {
             if (checkNote(note, chromatic)) {
                 return chromatic;
             }
         })
-        return result ? CHROMATIC.indexOf(result) : -1;
+        return result ? chromatic.indexOf(result) : -1;
     };
 
     const findInstrumentInterval = (source: string, target: string): number => {
 
         if (source === target) return 0;
 
-        // const sourceIndex = CHROMATIC.indexOf(source);
         const sourceIndex = getNoteIndex(source);
+        const chromatic = MajorKey.getFullChromatics();
 
         let index = sourceIndex;
 
@@ -61,15 +62,15 @@ const Transpose = () => {
         // Calculate the number of semi-tones to transpose forwards
         do {
             forwards++;
-            index = (index + 1) % CHROMATIC.length;
-        } while (!checkNote(target, CHROMATIC[index]));
+            index = (index + 1) % chromatic.length;
+        } while (!checkNote(target, chromatic[index]));
 
         // Calculate the number of semi-tones to transpose backwards
         index = sourceIndex;
         do {
             reverse++;
-            index = (index - 1 + CHROMATIC.length) % CHROMATIC.length;
-        } while (!checkNote(target, CHROMATIC[index]));
+            index = (index - 1 + chromatic.length) % chromatic.length;
+        } while (!checkNote(target, chromatic[index]));
 
         if (forwards === reverse) {
             // If the forwards or backwareds intervals are the same transpose down
@@ -81,15 +82,15 @@ const Transpose = () => {
     };
 
     const transpose = (source: string, interval: number): string => {
-        // const sourceIndex = CHROMATIC.indexOf(source);
+        const chromatic = MajorKey.getFullChromatics();
         const sourceIndex = getNoteIndex(source);
         let index = sourceIndex;
 
         for (let i = 0; interval < 0 ? i > interval: i < interval; interval < 0 ? i-- : i++) {
-            index = interval > 0 ? (index + 1) % CHROMATIC.length : (index - 1 + CHROMATIC.length) % CHROMATIC.length;
+            index = interval > 0 ? (index + 1) % chromatic.length : (index - 1 + chromatic.length) % chromatic.length;
         }
 
-        return CHROMATIC[index];
+        return chromatic[index];
     };
 
     const clearValues = () => {
@@ -149,7 +150,7 @@ const Transpose = () => {
                     <label htmlFor="sourceNote">Source note:</label>
                     <select id="sourceNote" name="sourceNote" defaultValue="-" onChange={clearValues}>
                         <option value="-">---</option>
-                        {CHROMATIC.map((note) => (
+                        {MajorKey.getFullChromatics().map((note) => (
                         <option key={note} value={note}>{note}</option>
                         ))}
                     </select>

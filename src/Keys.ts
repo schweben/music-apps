@@ -9,21 +9,6 @@ export const TRANSPOSING_INSTRUMENTS: string[] = [
     "B"
 ];
 
-export const CHROMATIC: string[] = [
-    "C",
-    "C♯/D♭",
-    "D",
-    "D♯/E♭",
-    "E",
-    "F",
-    "F♯",
-    "G",
-    "G♯/A♭",
-    "A",
-    "A♯/B♭",
-    "B"
-];
-
 export const INTERVALS: Record<number, string> = {
     0: 'Unison',
     1: 'Minor 2nd',

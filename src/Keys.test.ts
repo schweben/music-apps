@@ -27,39 +27,6 @@ describe('Keys Constants', () => {
     });
   });
 
-  describe('CHROMATIC', () => {
-    it('should contain 12 chromatic notes', () => {
-      expect(CHROMATIC).toBeDefined();
-      expect(CHROMATIC).toHaveLength(12);
-    });
-
-    it('should start with C', () => {
-      expect(CHROMATIC[0]).toBe('C');
-    });
-
-    it('should end with B', () => {
-      expect(CHROMATIC[11]).toBe('B');
-    });
-
-    it('should include enharmonic equivalents', () => {
-      expect(CHROMATIC).toContain('C♯/D♭');
-      expect(CHROMATIC).toContain('D♯/E♭');
-      expect(CHROMATIC).toContain('G♯/A♭');
-      expect(CHROMATIC).toContain('A♯/B♭');
-    });
-
-    it('should not contain duplicates', () => {
-      const uniqueNotes = new Set(CHROMATIC);
-      expect(uniqueNotes.size).toBe(CHROMATIC.length);
-    });
-
-    it('should contain natural notes E and F without sharps between them', () => {
-      const eIndex = CHROMATIC.indexOf('E');
-      const fIndex = CHROMATIC.indexOf('F');
-      expect(fIndex - eIndex).toBe(1);
-    });
-  });
-
   describe('INTERVALS', () => {
     it('should define intervals from 0 to 12', () => {
       expect(Object.keys(INTERVALS)).toHaveLength(13);
@@ -93,55 +60,11 @@ describe('Keys Constants', () => {
     });
   });
 
-  describe('KEY_SIGNATURES', () => {
-    it('should contain 15 major key signatures', () => {
-      expect(Object.keys(KEY_SIGNATURES)).toHaveLength(15);
-    });
-
-    it('should include C major with no sharps or flats', () => {
-      expect(KEY_SIGNATURES['C']).toBe('No sharps or flats');
-    });
-
-    it('should include sharp keys', () => {
-      expect(KEY_SIGNATURES['G']).toBe('1 sharp');
-      expect(KEY_SIGNATURES['D']).toBe('2 sharps');
-      expect(KEY_SIGNATURES['A']).toBe('3 sharps');
-      expect(KEY_SIGNATURES['E']).toBe('4 sharps');
-      expect(KEY_SIGNATURES['B']).toBe('5 sharps');
-      expect(KEY_SIGNATURES['F♯']).toBe('6 sharps');
-      expect(KEY_SIGNATURES['C♯']).toBe('7 sharps');
-    });
-
-    it('should include flat keys', () => {
-      expect(KEY_SIGNATURES['F']).toBe('1 flat');
-      expect(KEY_SIGNATURES['B♭']).toBe('2 flats');
-      expect(KEY_SIGNATURES['E♭']).toBe('3 flats');
-      expect(KEY_SIGNATURES['A♭']).toBe('4 flats');
-      expect(KEY_SIGNATURES['D♭']).toBe('5 flats');
-      expect(KEY_SIGNATURES['G♭']).toBe('6 flats');
-      expect(KEY_SIGNATURES['C♭']).toBe('7 flats');
-    });
-
-    it('should have consistent description format', () => {
-      Object.values(KEY_SIGNATURES).forEach(description => {
-        expect(typeof description).toBe('string');
-        expect(description.length).toBeGreaterThan(0);
-      });
-    });
-
-    it('should not have undefined keys', () => {
-      Object.entries(KEY_SIGNATURES).forEach(([key, value]) => {
-        expect(key).toBeDefined();
-        expect(value).toBeDefined();
-      });
-    });
-  });
-
   describe('Major Keys', () => {
     describe('Key Signatures', () => {
       it('should have correct details for C Major', () => {
         expect(MajorKey.C.getName()).toBe('C');
-        expect(MajorKey.C.getKeySignature()).toBe('');
+        expect(MajorKey.C.getKeySignature()).toBe('No ♯ or ♭');
         expect(MajorKey.C.getRelativeMinor()).toBe('A');
       });
 
@@ -264,7 +187,7 @@ describe('Keys Constants', () => {
 
       it('should return a record of key names and key signatures', () => {
         const keySignatures: Record<string, string> = MajorKey.getKeySignatures();
-        // expect(keySignatures.length).toBe(15);
+        expect(Object.keys(keySignatures).length).toBe(15);
         expect(keySignatures['C']).toBe('No ♯ or ♭');
         expect(keySignatures['G']).toBe('1♯');
         expect(keySignatures['D']).toBe('2♯');
