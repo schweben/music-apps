@@ -261,6 +261,26 @@ describe('Keys Constants', () => {
         expect(chromatics[10]).toBe('B♭/A♯');
         expect(chromatics[11]).toBe('B');
       });
+
+      it('should return a record of key names and key signatures', () => {
+        const keySignatures: Record<string, string> = MajorKey.getKeySignatures();
+        // expect(keySignatures.length).toBe(15);
+        expect(keySignatures['C']).toBe('No ♯ or ♭');
+        expect(keySignatures['G']).toBe('1♯');
+        expect(keySignatures['D']).toBe('2♯');
+        expect(keySignatures['A']).toBe('3♯');
+        expect(keySignatures['E']).toBe('4♯');
+        expect(keySignatures['B']).toBe('5♯');
+        expect(keySignatures['F♯']).toBe('6♯');
+        expect(keySignatures['C♯']).toBe('7♯');
+        expect(keySignatures['F']).toBe('1♭');
+        expect(keySignatures['B♭']).toBe('2♭');
+        expect(keySignatures['E♭']).toBe('3♭');
+        expect(keySignatures['A♭']).toBe('4♭');
+        expect(keySignatures['D♭']).toBe('5♭');
+        expect(keySignatures['G♭']).toBe('6♭');
+        expect(keySignatures['C♭']).toBe('7♭');
+      });
     });
   });
 });

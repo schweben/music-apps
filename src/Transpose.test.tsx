@@ -81,8 +81,8 @@ describe('Transpose Component', () => {
 
     it('should display key signatures with descriptions', () => {
       render(<Transpose />);
-      expect(screen.getByText(/C \(no sharps or flats\)/i)).toBeInTheDocument();
-      expect(screen.getByText(/G \(1 sharp\)/i)).toBeInTheDocument();
+      expect(screen.getByText(/C \(No ♯ or ♭\)/i)).toBeInTheDocument();
+      expect(screen.getByText(/G \(1♯\)/i)).toBeInTheDocument();
     });
   });
 

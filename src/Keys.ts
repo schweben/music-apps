@@ -40,24 +40,6 @@ export const INTERVALS: Record<number, string> = {
     12: 'Octave'
 };
 
-export const KEY_SIGNATURES: Record<string, string> = {
-    "C": "No sharps or flats",
-    "G": "1 sharp",
-    "D": "2 sharps",
-    "A": "3 sharps",
-    "E": "4 sharps",
-    "B": "5 sharps",
-    "F♯": "6 sharps",
-    "C♯": "7 sharps",
-    "F": "1 flat",
-    "B♭": "2 flats",
-    "E♭": "3 flats",
-    "A♭": "4 flats",
-    "D♭": "5 flats",
-    "G♭": "6 flats",
-    "C♭": "7 flats"
-};
-
 export class MajorKey {
 
     static readonly C: MajorKey = new MajorKey('C', 0, 0, 'A');
@@ -115,13 +97,27 @@ export class MajorKey {
         } else if (this.flats > 0) {
             return `${this.flats}♭`;
         } else {
-            return '';
+            return 'No ♯ or ♭';
         }
     }
 
     static getKeySignatures(): Record<string, string> {
         return {
-            [this.C.getName()]: this.C.getKeySignature()
+            [this.C.getName()]: this.C.getKeySignature(),
+            [this.G.getName()]: this.G.getKeySignature(),
+            [this.D.getName()]: this.D.getKeySignature(),
+            [this.A.getName()]: this.A.getKeySignature(),
+            [this.E.getName()]: this.E.getKeySignature(),
+            [this.B.getName()]: this.B.getKeySignature(),
+            [this.F_SHARP.getName()]: this.F_SHARP.getKeySignature(),
+            [this.C_SHARP.getName()]: this.C_SHARP.getKeySignature(),
+            [this.F.getName()]: this.F.getKeySignature(),
+            [this.B_FLAT.getName()]: this.B_FLAT.getKeySignature(),
+            [this.E_FLAT.getName()]: this.E_FLAT.getKeySignature(),
+            [this.A_FLAT.getName()]: this.A_FLAT.getKeySignature(),
+            [this.D_FLAT.getName()]: this.D_FLAT.getKeySignature(),
+            [this.G_FLAT.getName()]: this.G_FLAT.getKeySignature(),
+            [this.C_FLAT.getName()]: this.C_FLAT.getKeySignature()
         }
     }
 

@@ -1,6 +1,6 @@
 import './Transpose.css';
 import React, { useState } from 'react';
-import { CHROMATIC, INTERVALS, KEY_SIGNATURES, TRANSPOSING_INSTRUMENTS } from './Keys';
+import { CHROMATIC, INTERVALS, MajorKey, TRANSPOSING_INSTRUMENTS } from './Keys';
 import HelpPanel from './HelpPanel';
 
 const Transpose = () => {
@@ -99,7 +99,7 @@ const Transpose = () => {
     }
 
     const getKeySignature = (enharmonic: string) : string => {
-        const key = Object.keys(KEY_SIGNATURES).find(key => {
+        const key = Object.keys(MajorKey.getKeySignatures()).find(key => {
             if (checkNote(key, enharmonic)) {
                 return key;
             }
@@ -140,7 +140,7 @@ const Transpose = () => {
                     <label htmlFor="sourceKey">Source key signature:</label>
                     <select id="sourceKey" name="sourceKey" defaultValue="-" onChange={clearValues}>
                         <option value="-">---</option>
-                        { Object.entries(KEY_SIGNATURES).map(([key, value]) => (
+                        { Object.entries(MajorKey.getKeySignatures()).map(([key, value]) => (
                             <option key={key} value={key}>{key} ({value})</option>
                         ))}
                     </select>
@@ -162,7 +162,7 @@ const Transpose = () => {
                 {transpositionInterval !== 0 ? (
                     <>
                         <h3>Transposing {transpositionInterval > 0 ? 'up' : 'down'} a {INTERVALS[Math.abs(transpositionInterval)]}</h3>
-                        <h3 className={transposedKey ? '' : 'hidden'}>Transposed key signature: {transposedKey} ({transposedKey ? KEY_SIGNATURES[transposedKey] : ''})</h3>
+                        <h3 className={transposedKey ? '' : 'hidden'}>Transposed key signature: {transposedKey} ({transposedKey ? MajorKey.getKeySignatures()[transposedKey] : ''})</h3>
                         <h3 className={transposedNote ? '' : 'hidden'}>Transposed note: {transposedNote}</h3>
                     </>
                 ) : (
