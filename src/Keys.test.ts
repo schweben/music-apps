@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { TRANSPOSING_INSTRUMENTS, INTERVALS, MajorKey } from './Keys';
+import { MajorKey } from './Keys';
+import { INTERVALS, TRANSPOSING_INSTRUMENTS } from './musicConstants';
 
 describe('Keys Constants', () => {
   describe('TRANSPOSING_INSTRUMENTS', () => {

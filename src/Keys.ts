@@ -1,3 +1,6 @@
+/**
+ * Represents a major key with its properties and utility methods.
+ */
 export class MajorKey {
 
     static readonly C: MajorKey = new MajorKey('C', 0, 0, 'A');
@@ -30,19 +33,19 @@ export class MajorKey {
         this.enharmonic = enharmonic;
     }
 
-    private getName(): string {
+    public getName(): string {
         return this.name;
     }
 
-    private getEnharmonicName(): string {
+    public getEnharmonicName(): string {
         return this.enharmonic ? `${this.name}/${this.enharmonic}` : this.name;
     }
 
-    private getRelativeMinor(): string {
+    public getRelativeMinor(): string {
         return this.relativeMinor;
     }
 
-    private getKeySignature(): string {
+    public getKeySignature(): string {
         if (this.sharps === undefined || this.flats === undefined) {
             return '';
         }
@@ -55,10 +58,19 @@ export class MajorKey {
         }
     }
 
+    /**
+     * Get the key signature for a given key name. Returns '?' if not found.
+     * @param keyName The name of the key.
+     */
     static getKeySignature(keyName: string): string {
-        return this.getKeySignatures()[keyName];
+        const sig = this.getKeySignatures()[keyName];
+        return sig !== undefined ? sig : '?';
     }
 
+    /**
+     * Get the dual key signature for a compound key name (e.g., 'C/G').
+     * @param keyName The compound key name.
+     */
     static getDualKeySignature(keyName: string): string {
         const keySignatures = keyName.split('/').map(part => {
             return this.getKeySignature(part);
@@ -66,6 +78,9 @@ export class MajorKey {
         return keySignatures.join('/');
     }
 
+    /**
+     * Get a map of all key names to their signatures.
+     */
     static getKeySignatures(): Record<string, string> {
         return {
             [this.C.getName()]: this.C.getKeySignature(),
@@ -103,6 +118,9 @@ export class MajorKey {
         ];
     }
 
+    /**
+     * Get all major key names in circle of fifths order.
+     */
     static getMajorKeys(): string[] {
         return [
             this.G.getName(),
@@ -120,6 +138,9 @@ export class MajorKey {
         ];
     }
 
+    /**
+     * Get all major key names for the circle of fifths, including enharmonics.
+     */
     static getMajorKeysForCircleOfFifths(): string[] {
         return [
             this.G.getName(),
@@ -136,6 +157,9 @@ export class MajorKey {
             this.C.getName()
         ];
     }
+    /**
+     * Get all relative minor key names in circle of fifths order.
+     */
     static getMinorKeys(): string[] {
         return [
             this.G.getRelativeMinor(),
@@ -152,31 +176,4 @@ export class MajorKey {
             this.C.getRelativeMinor()
         ];
     }
-};
-
-export const TRANSPOSING_INSTRUMENTS: string[] = [
-    "C",
-    "D",
-    "E♭",
-    "E",
-    "F",
-    "A",
-    "B♭",
-    "B"
-];
-
-export const INTERVALS: Record<number, string> = {
-    0: 'Unison',
-    1: 'Minor 2nd',
-    2: 'Major 2nd',
-    3: 'Minor 3rd',
-    4: 'Major 3rd',
-    5: 'Perfect 4th',
-    6: 'Augmented 4th',
-    7: 'Perfect 5th',
-    8: 'Minor 6th',
-    9: 'Major 6th',
-    10: 'Minor 7th',
-    11: 'Major 7th',
-    12: 'Octave'
 };

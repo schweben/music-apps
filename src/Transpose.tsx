@@ -1,7 +1,8 @@
 import './Transpose.css';
 import React, { useState } from 'react';
-import { INTERVALS, MajorKey, TRANSPOSING_INSTRUMENTS } from './Keys';
+import { MajorKey } from './Keys';
 import HelpPanel from './HelpPanel';
+import { INTERVALS, TRANSPOSING_INSTRUMENTS } from './musicConstants';
 
 const Transpose = () => {
     const [transposedKey, setTransposedKey] = useState<string>();
