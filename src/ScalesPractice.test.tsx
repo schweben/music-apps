@@ -275,7 +275,7 @@ describe('ScalesPractice Component', () => {
 
       await waitFor(() => {
         const scaleDisplay = screen.getByRole('heading', { level: 3 });
-        expect(scaleDisplay.textContent).toMatch(/sharp|flat|no sharps or flats/i);
+        expect(scaleDisplay.textContent).toMatch(/♯|♭|no ♯ or ♭/i);
       });
     });
 
