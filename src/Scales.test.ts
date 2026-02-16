@@ -14,7 +14,7 @@ import { MajorKey } from './Keys';
 describe('Scale Class', () => {
   describe('Constructor and Getters', () => {
     it('should create a scale with all parameters', () => {
-      const scale = new Scale('C Major', '2 octaves', 0, 0);
+      const scale = new Scale('C Major', '2 octaves', MajorKey.C);
       expect(scale.getName()).toBe('C Major');
       expect(scale.getRange()).toBe('2 octaves');
     });
@@ -27,8 +27,8 @@ describe('Scale Class', () => {
     });
 
     it('should create scales with different ranges', () => {
-      const twoOctave = new Scale('Test Scale', '2 octaves', 1, 0);
-      const twelfth = new Scale('Test Scale 2', '12th', 0, 2);
+      const twoOctave = new Scale('Test Scale', '2 octaves', MajorKey.F);
+      const twelfth = new Scale('Test Scale 2', '12th', MajorKey.D);
       expect(twoOctave.getRange()).toBe('2 octaves');
       expect(twelfth.getRange()).toBe('12th');
     });
