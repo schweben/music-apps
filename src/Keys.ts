@@ -41,21 +41,21 @@ export const INTERVALS: Record<number, string> = {
 };
 
 export const KEY_SIGNATURES: Record<string, string> = {
-    "C": "no sharps or flats",
+    "C": "No sharps or flats",
     "G": "1 sharp",
     "D": "2 sharps",
     "A": "3 sharps",
     "E": "4 sharps",
     "B": "5 sharps",
-    "F♯": "6 sharp",
-    "C♯": "7 sharp",
+    "F♯": "6 sharps",
+    "C♯": "7 sharps",
     "F": "1 flat",
-    "B♭": "2 flat",
-    "E♭": "3 flat",
-    "A♭": "4 flat",
-    "D♭": "5 flat",
-    "G♭": "6 flat",
-    "C♭": "7 flat"
+    "B♭": "2 flats",
+    "E♭": "3 flats",
+    "A♭": "4 flats",
+    "D♭": "5 flats",
+    "G♭": "6 flats",
+    "C♭": "7 flats"
 };
 
 export class MajorKey {

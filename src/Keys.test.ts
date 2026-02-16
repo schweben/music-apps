@@ -99,7 +99,7 @@ describe('Keys Constants', () => {
     });
 
     it('should include C major with no sharps or flats', () => {
-      expect(KEY_SIGNATURES['C']).toBe('no sharps or flats');
+      expect(KEY_SIGNATURES['C']).toBe('No sharps or flats');
     });
 
     it('should include sharp keys', () => {
@@ -108,18 +108,18 @@ describe('Keys Constants', () => {
       expect(KEY_SIGNATURES['A']).toBe('3 sharps');
       expect(KEY_SIGNATURES['E']).toBe('4 sharps');
       expect(KEY_SIGNATURES['B']).toBe('5 sharps');
-      expect(KEY_SIGNATURES['F♯']).toBe('6 sharp');
-      expect(KEY_SIGNATURES['C♯']).toBe('7 sharp');
+      expect(KEY_SIGNATURES['F♯']).toBe('6 sharps');
+      expect(KEY_SIGNATURES['C♯']).toBe('7 sharps');
     });
 
     it('should include flat keys', () => {
       expect(KEY_SIGNATURES['F']).toBe('1 flat');
-      expect(KEY_SIGNATURES['B♭']).toBe('2 flat');
-      expect(KEY_SIGNATURES['E♭']).toBe('3 flat');
-      expect(KEY_SIGNATURES['A♭']).toBe('4 flat');
-      expect(KEY_SIGNATURES['D♭']).toBe('5 flat');
-      expect(KEY_SIGNATURES['G♭']).toBe('6 flat');
-      expect(KEY_SIGNATURES['C♭']).toBe('7 flat');
+      expect(KEY_SIGNATURES['B♭']).toBe('2 flats');
+      expect(KEY_SIGNATURES['E♭']).toBe('3 flats');
+      expect(KEY_SIGNATURES['A♭']).toBe('4 flats');
+      expect(KEY_SIGNATURES['D♭']).toBe('5 flats');
+      expect(KEY_SIGNATURES['G♭']).toBe('6 flats');
+      expect(KEY_SIGNATURES['C♭']).toBe('7 flats');
     });
 
     it('should have consistent description format', () => {
