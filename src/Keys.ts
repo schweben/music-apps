@@ -33,18 +33,30 @@ export class MajorKey {
         this.enharmonic = enharmonic;
     }
 
+    /**
+     * Get the name of the key
+     */
     public getName(): string {
         return this.name;
     }
 
+    /**
+     * Get the name of the enharmonic note associated with this key (if there is one)
+     */
     public getEnharmonicName(): string {
         return this.enharmonic ? `${this.name}/${this.enharmonic}` : this.name;
     }
 
+    /**
+     * Get the name of the relative minor key for this major key
+     */
     public getRelativeMinor(): string {
         return this.relativeMinor;
     }
 
+    /**
+     * Get the key signature for the key (e.g., 3♭)
+     */
     public getKeySignature(): string {
         if (this.sharps === undefined || this.flats === undefined) {
             return '';
@@ -101,6 +113,9 @@ export class MajorKey {
         }
     }
 
+    /**
+     * Get a list of all notes in a chromatic scale, starting on C
+     */
     static getFullChromatics(): string[] {
         return [
             this.C.getEnharmonicName(),

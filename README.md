@@ -33,8 +33,8 @@ Then take the build output files from /dist
 - [X] Display code coverage on dashboard
 - [X] Improve help text
 - [X] Display key signatures on circle of fifths
-- [ ] Consolidate constants
-- [ ] Check 'Noto Sans' is rendering properly in circle of fifths
+- [X] Consolidate constants
+- [X] Check 'Noto Sans' is rendering properly in circle of fifths
 
 ## Bugs
 
@@ -44,4 +44,4 @@ Then take the build output files from /dist
 - [X] Flat symbols don't render on iOS
 - [X] Buttons are blue on iOS
 - [X] Scales practice does not use the same sharps and flats symbols as the rest of the application
-- [ ] Text doesn't fit into circle of fifths properly on iPad
+- [X] Text doesn't fit into circle of fifths properly on iPad
