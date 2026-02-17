@@ -12,8 +12,9 @@ const CircleOfFifths = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        // Calculate responsize size
+        // Calculate responsive size
         const isMobile = window.innerWidth <= 640;
+        const isTablet = window.innerWidth > 640 && window.innerWidth <= 1024;
         const size = isMobile ? Math.min(window.innerWidth * 0.9, 400) : 600;
         const scale = size / 600;
 
@@ -34,7 +35,13 @@ const CircleOfFifths = () => {
         const centerY = canvas.height / 2;
 
         // Set text style once before drawing all letters
-        const baseFontSize = 32;
+        let baseFontSize = 32;
+        if (isTablet) {
+            baseFontSize = 24; // Smaller font for tablets
+        }
+        if (isMobile) {
+            baseFontSize = 20; // Even smaller font for phones
+        }
         const fontSize = baseFontSize * scale;
         ctx.font = `${fontSize}px 'Noto Sans', system-ui, Avenir, Helvetica, 'Arial Unicode MS', sans-serif`;
         ctx.textAlign = 'center';
