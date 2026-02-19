@@ -14,7 +14,6 @@ const CircleOfFifths = () => {
 
         // Calculate responsive size
         const isMobile = window.innerWidth <= 640;
-        const isTablet = window.innerWidth > 640 && window.innerWidth <= 1024;
         const size = isMobile ? Math.min(window.innerWidth * 0.9, 400) : 600;
         const scale = size / 600;
 
