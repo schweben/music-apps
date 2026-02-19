@@ -9,11 +9,12 @@ import {
   DOMINANT_7TH_SCALES,
   DIMINISHED_7TH_SCALES,
 } from './Scales';
+import { MajorKey } from './Keys';
 
 describe('Scale Class', () => {
   describe('Constructor and Getters', () => {
     it('should create a scale with all parameters', () => {
-      const scale = new Scale('C Major', '2 octaves', 0, 0);
+      const scale = new Scale('C Major', '2 octaves', MajorKey.C);
       expect(scale.getName()).toBe('C Major');
       expect(scale.getRange()).toBe('2 octaves');
     });
@@ -26,8 +27,8 @@ describe('Scale Class', () => {
     });
 
     it('should create scales with different ranges', () => {
-      const twoOctave = new Scale('Test Scale', '2 octaves', 1, 0);
-      const twelfth = new Scale('Test Scale 2', '12th', 0, 2);
+      const twoOctave = new Scale('Test Scale', '2 octaves', MajorKey.F);
+      const twelfth = new Scale('Test Scale 2', '12th', MajorKey.D);
       expect(twoOctave.getRange()).toBe('2 octaves');
       expect(twelfth.getRange()).toBe('12th');
     });
@@ -40,42 +41,42 @@ describe('Scale Class', () => {
     });
 
     it('should return "No sharps or flats" for C major', () => {
-      const scale = new Scale('C Major', '2 octaves', 0, 0);
-      expect(scale.getKey()).toBe('No sharps or flats');
+      const scale = new Scale('C Major', '2 octaves', MajorKey.C);
+      expect(scale.getKey()).toBe('No ♯ or ♭');
     });
 
     it('should return singular form for 1 sharp', () => {
-      const scale = new Scale('G Major', '12th', 1, 0);
-      expect(scale.getKey()).toBe('1 sharp');
+      const scale = new Scale('G Major', '12th', MajorKey.G);
+      expect(scale.getKey()).toBe('1♯');
     });
 
     it('should return plural form for multiple sharps', () => {
-      const twoSharps = new Scale('D Major', '12th', 2, 0);
-      const threeSharps = new Scale('A Major', '2 octaves', 3, 0);
-      expect(twoSharps.getKey()).toBe('2 sharps');
-      expect(threeSharps.getKey()).toBe('3 sharps');
+      const twoSharps = new Scale('D Major', '12th', MajorKey.D);
+      const threeSharps = new Scale('A Major', '2 octaves', MajorKey.A);
+      expect(twoSharps.getKey()).toBe('2♯');
+      expect(threeSharps.getKey()).toBe('3♯');
     });
 
     it('should return singular form for 1 flat', () => {
-      const scale = new Scale('F Major', '12th', 0, 1);
-      expect(scale.getKey()).toBe('1 flat');
+      const scale = new Scale('F Major', '12th', MajorKey.F);
+      expect(scale.getKey()).toBe('1♭');
     });
 
     it('should return plural form for multiple flats', () => {
-      const twoFlats = new Scale('Bb Major', '2 octaves', 0, 2);
-      const threeFlats = new Scale('Eb Major', '12th', 0, 3);
-      expect(twoFlats.getKey()).toBe('2 flats');
-      expect(threeFlats.getKey()).toBe('3 flats');
+      const twoFlats = new Scale('Bb Major', '2 octaves', MajorKey.B_FLAT);
+      const threeFlats = new Scale('Eb Major', '12th', MajorKey.E_FLAT);
+      expect(twoFlats.getKey()).toBe('2♭');
+      expect(threeFlats.getKey()).toBe('3♭');
     });
 
     it('should handle maximum sharps (7)', () => {
-      const scale = new Scale('C# Major', '2 octaves', 7, 0);
-      expect(scale.getKey()).toBe('7 sharps');
+      const scale = new Scale('C# Major', '2 octaves', MajorKey.C_SHARP);
+      expect(scale.getKey()).toBe('7♯');
     });
 
     it('should handle maximum flats (7)', () => {
-      const scale = new Scale('Cb Major', '2 octaves', 0, 7);
-      expect(scale.getKey()).toBe('7 flats');
+      const scale = new Scale('Cb Major', '2 octaves', MajorKey.C_FLAT);
+      expect(scale.getKey()).toBe('7♭');
     });
   });
 });
@@ -94,7 +95,7 @@ describe('MAJOR_SCALES', () => {
   it('should include C Major', () => {
     const cMajor = MAJOR_SCALES.find(s => s.getName() === 'C Major');
     expect(cMajor).toBeDefined();
-    expect(cMajor?.getKey()).toBe('No sharps or flats');
+    expect(cMajor?.getKey()).toBe('No ♯ or ♭');
   });
 
   it('should have valid ranges', () => {
@@ -111,12 +112,12 @@ describe('MAJOR_SCALES', () => {
   });
 
   it('should contain all 7 sharp keys', () => {
-    const sharpKeys = MAJOR_SCALES.filter(s => s.getKey()?.includes('sharp'));
+    const sharpKeys = MAJOR_SCALES.filter(s => s.getKey()?.includes('♯'));
     expect(sharpKeys.length).toBeGreaterThanOrEqual(6);
   });
 
   it('should contain all 6 flat keys', () => {
-    const flatKeys = MAJOR_SCALES.filter(s => s.getKey()?.includes('flat'));
+    const flatKeys = MAJOR_SCALES.filter(s => s.getKey()?.includes('♭'));
     expect(flatKeys.length).toBeGreaterThanOrEqual(5);
   });
 });
@@ -141,7 +142,7 @@ describe('HARMONIC_MINOR_SCALES', () => {
   it('should include A Harmonic Minor with no sharps or flats', () => {
     const aMin = HARMONIC_MINOR_SCALES.find(s => s.getName() === 'A Harmonic Minor');
     expect(aMin).toBeDefined();
-    expect(aMin?.getKey()).toBe('No sharps or flats');
+    expect(aMin?.getKey()).toBe('No ♯ or ♭');
   });
 });
 

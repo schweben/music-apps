@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { KEY_SIGNATURES, MAJOR_KEYS, MINOR_KEYS } from './Fifths';
 import HelpPanel from './HelpPanel';
+import { MajorKey } from './Keys';
 
 const CircleOfFifths = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -12,7 +12,7 @@ const CircleOfFifths = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        // Calculate responsize size
+        // Calculate responsive size
         const isMobile = window.innerWidth <= 640;
         const size = isMobile ? Math.min(window.innerWidth * 0.9, 400) : 600;
         const scale = size / 600;
@@ -27,27 +27,32 @@ const CircleOfFifths = () => {
         // Clear canvas before drawing
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        // Calculate the center of the canvas
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
         // Set stroke color and width
         ctx.strokeStyle = '#000000';
         ctx.lineWidth = 1;
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
 
         // Set text style once before drawing all letters
         const baseFontSize = 32;
         const fontSize = baseFontSize * scale;
-        ctx.font = `${fontSize}px Arial`;
+        ctx.font = `${fontSize}px 'Noto Sans', system-ui, Avenir, Helvetica, 'Arial Unicode MS', sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
+        // Calculate the circle radii
         const outerRadius = 290 * scale;
         const middleRadius = 200 * scale;
         const innerRadius = 70 * scale;
 
-        // Draw outer circle
+        // Fill colour for the outer and middle segments
+        ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+
+        // Draw outer circle (360 degree arc = 2 * PI radians)
         ctx.beginPath();
         ctx.arc(centerX, centerY, outerRadius, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
         ctx.fill();
         ctx.stroke();
 
@@ -57,24 +62,28 @@ const CircleOfFifths = () => {
         ctx.stroke();
 
         // Draw inner circle
+        ctx.fillStyle = "rgb(210, 181, 140)";
         ctx.beginPath();
         ctx.arc(centerX, centerY, innerRadius, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgb(210, 181, 140)";
         ctx.fill();
         ctx.stroke();
 
-        // Draw lines from inner circle to outer circle using degrees
+        // Draw lines from inner circle to outer circle using 30 degree spacing
+        // First line is at 15 degrees because there isn't a line at 0 degrees
         const segmentCount = 12;
         const segmentAngle = 30;
         const lineAngles = [];
         for (let degrees = 15; degrees < 360; degrees += segmentAngle) {
             lineAngles.push(degrees);
-            // Draw lines as before
+            // Convert degrees to radians (subtract 90 because the canvas starts at 90 degrees, but we need to count from 0 degrees)
             const angleRad = (degrees - 90) * Math.PI / 180;
+
+            // Calculate start and endpoint of line
             const startX = centerX + innerRadius * Math.cos(angleRad);
             const startY = centerY + innerRadius * Math.sin(angleRad);
             const endX = centerX + outerRadius * Math.cos(angleRad);
             const endY = centerY + outerRadius * Math.sin(angleRad);
+
             ctx.beginPath();
             ctx.moveTo(startX, startY);
             ctx.lineTo(endX, endY);
@@ -113,8 +122,8 @@ const CircleOfFifths = () => {
             ctx.fill();
 
             // Display key signature in center
-            const key = MAJOR_KEYS[highlightedSegment];
-            const keySignature = KEY_SIGNATURES[key];
+            const key = MajorKey.getMajorKeysForCircleOfFifths()[highlightedSegment];
+            const keySignature = MajorKey.getDualKeySignature(key);
             ctx.fillStyle = '#000000';
             ctx.fillText(`${keySignature}`, centerX, centerY);
         }
@@ -130,12 +139,12 @@ const CircleOfFifths = () => {
             const outerTextRadius = (middleRadius + outerRadius) / 2;
             const outerTextX = centerX + outerTextRadius * Math.cos(midAngleRad);
             const outerTextY = centerY + outerTextRadius * Math.sin(midAngleRad);
-            ctx.fillText(MAJOR_KEYS[i], outerTextX, outerTextY);
+            ctx.fillText(MajorKey.getMajorKeysForCircleOfFifths()[i], outerTextX, outerTextY);
 
             const innerTextRadius = (innerRadius + middleRadius) / 2;
             const innerTextX = centerX + innerTextRadius * Math.cos(midAngleRad);
             const innerTextY = centerY + innerTextRadius * Math.sin(midAngleRad);
-            ctx.fillText(MINOR_KEYS[i], innerTextX, innerTextY);
+            ctx.fillText(MajorKey.getMinorKeys()[i], innerTextX, innerTextY);
         }
     };
 
@@ -161,12 +170,12 @@ const CircleOfFifths = () => {
 
         // Calculate angle from center (in degrees, with 0 at top, clockwise)
         let angle = Math.atan2(dy, dx) * 180 / Math.PI;
-        angle = (angle + 90 + 360) % 360; // Convert to 0-360 range with 0 at top
+        // Convert to 0-360 range with 0 at top
+        angle = (angle + 90 + 360) % 360;
 
         // Determine which segment (0-11)
         const segmentAngle = 30;
         const segmentNumber = Math.floor((angle + 345) / segmentAngle) % 12;
-
 
         // If the clicked segment is already selected, deselect it and return
         if (selectedSegment !== null && selectedSegment === segmentNumber) {
