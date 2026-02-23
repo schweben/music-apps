@@ -148,9 +148,25 @@ const CircleOfFifths = () => {
         }
     };
 
+    // Effect 1: redraw the canvas when selection state changes.
+    // This keeps rendering updates tied only to app state transitions.
     useEffect(() => {
         drawCircle(selectedSegment);
     }, [selectedSegment]); // Redraw when selectedSegment changes
+
+    // Effect 2: manage the browser resize listener lifecycle.
+    // Keeping this separate avoids mixing subscription setup/cleanup with redraw-only logic.
+    useEffect(() => {
+        const handleResize = () => {
+            drawCircle(selectedSegment);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [selectedSegment]);
 
     const circleClicked = (event: React.MouseEvent) => {
         const canvas = canvasRef.current;

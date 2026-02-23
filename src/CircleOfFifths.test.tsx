@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CircleOfFifths from './CircleOfFifths';
@@ -122,6 +122,26 @@ describe('CircleOfFifths Component', () => {
       const canvas = document.querySelector('canvas');
       expect(canvas).toBeTruthy();
       expect(canvas?.tagName).toBe('CANVAS');
+    });
+
+    it('should register and clean up resize listener', () => {
+      const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
+      const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
+
+      const { unmount } = render(<CircleOfFifths />);
+
+      const resizeAddCall = addEventListenerSpy.mock.calls.find(call => call[0] === 'resize');
+      expect(resizeAddCall).toBeDefined();
+
+      const resizeHandler = resizeAddCall?.[1] as EventListener;
+      expect(typeof resizeHandler).toBe('function');
+
+      unmount();
+
+      expect(removeEventListenerSpy).toHaveBeenCalledWith('resize', resizeHandler);
+
+      addEventListenerSpy.mockRestore();
+      removeEventListenerSpy.mockRestore();
     });
   });
 

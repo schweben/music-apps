@@ -6,7 +6,6 @@ import HelpPanel from './HelpPanel';
 const ScalesPractice = () => {
     const [scale, setScale] = useState<Scale>();
     const [showKey, setShowKey] = useState<boolean>(false);
-    const [helpMessage, setHelpMessage] = useState<string>();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         // Prevent the browser from reloading the page
@@ -79,13 +78,13 @@ const ScalesPractice = () => {
                 <h2>Select which type of scale to practice</h2>
                 <form id="form" onSubmit={handleSubmit}>
                     <ul>
-                        <li><label><input type="checkbox" name="major" defaultChecked={true} onClick={clearScale} />Major</label></li>
-                        <li><label><input type="checkbox" name="harmonic" onClick={clearScale} />Harmonic Minor</label></li>
-                        <li><label><input type="checkbox" name="melodic" onClick={clearScale} />Melodic Minor</label></li>
-                        <li><label><input type="checkbox" name="chromatic" onClick={clearScale} />Chromatic</label></li >
-                        <li><label><input type="checkbox" name="pentatonic" onClick={clearScale} />Pentatonic</label></li >
-                        <li><label><input type="checkbox" name="dominant" onClick={clearScale} />Dominant 7th</label></li >
-                        <li><label><input type="checkbox" name="diminished" onClick={clearScale} />Diminished 7th</label></li >
+                        <li><label><input type="checkbox" name="major" defaultChecked={true} onChange={clearScale} />Major</label></li>
+                        <li><label><input type="checkbox" name="harmonic" onChange={clearScale} />Harmonic Minor</label></li>
+                        <li><label><input type="checkbox" name="melodic" onChange={clearScale} />Melodic Minor</label></li>
+                        <li><label><input type="checkbox" name="chromatic" onChange={clearScale} />Chromatic</label></li >
+                        <li><label><input type="checkbox" name="pentatonic" onChange={clearScale} />Pentatonic</label></li >
+                        <li><label><input type="checkbox" name="dominant" onChange={clearScale} />Dominant 7th</label></li >
+                        <li><label><input type="checkbox" name="diminished" onChange={clearScale} />Diminished 7th</label></li >
                     </ul>
                     <button type="submit">Get a scale</button>
                 </form>
@@ -94,12 +93,6 @@ const ScalesPractice = () => {
                 <div className='panel'>
                     <h3>{scale.getName()} ({scale.getRange()}){showKey ? " - " + scale.getKey() : ""}</h3>
                     <button disabled={scale.getKey() === null} onClick={() => { setShowKey(!showKey); }}>{showKey ? "Hide key" : "Show key"}</button>
-                </div>
-            )}
-            {helpMessage !== undefined && (
-                <div className='help-panel'>
-                    <h3>{helpMessage}</h3>
-                    <button type="button" className="close-button" onClick={() => setHelpMessage(undefined)}>X</button>
                 </div>
             )}
         </div>

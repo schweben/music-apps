@@ -225,7 +225,8 @@ describe('ScalesPractice Component', () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/diminshed 7th/i)).toBeInTheDocument();
+        const scaleHeading = screen.getByRole('heading', { level: 3 });
+        expect(scaleHeading.textContent).toMatch(/diminished 7th/i);
       });
     });
   });

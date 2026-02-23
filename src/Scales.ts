@@ -59,7 +59,7 @@ export const HARMONIC_MINOR_SCALES: Scale[] = [
 export const MELODIC_MINOR_SCALES: Scale[] = [
     new Scale("A Melodic Minor", "2 octaves", MajorKey.C),
     new Scale("E Melodic Minor", "12th", MajorKey.G),
-    new Scale("B Melodic Minor", "2 octaves", MajorKey.G),
+    new Scale("B Melodic Minor", "2 octaves", MajorKey.D),
     new Scale("F♯ Melodic Minor", "2 octaves", MajorKey.A),
     new Scale("C♯ Melodic Minor", "2 octaves", MajorKey.E),
     new Scale("G♯ Melodic Minor", "12th", MajorKey.B),
@@ -101,7 +101,7 @@ export const PENTATONIC_SCALES: Scale[] = [
 export const DOMINANT_7TH_SCALES: Scale[] = [
     new Scale("Dominant 7th in the key of C", "2 octaves", MajorKey.C),
     new Scale("Dominant 7th in the key of G", "12th", MajorKey.G),
-    new Scale("Dominant 7th in the key of D", "2 octaves", MajorKey.G),
+    new Scale("Dominant 7th in the key of D", "2 octaves", MajorKey.D),
     new Scale("Dominant 7th in the key of A", "12th", MajorKey.A),
     new Scale("Dominant 7th in the key of E", "12th", MajorKey.E),
     new Scale("Dominant 7th in the key of B", "2 octaves", MajorKey.B),
@@ -114,11 +114,11 @@ export const DOMINANT_7TH_SCALES: Scale[] = [
 ];
 
 export const DIMINISHED_7TH_SCALES: Scale[] = [
-    new Scale("Diminshed 7th starting on G", "2 octaves"),
-    new Scale("Diminshed 7th starting on A",  "2 octaves"),
-    new Scale("Diminshed 7th starting on G♯", "2 octaves"),
-    new Scale("Diminshed 7th starting on B♭", "2 octaves"),
-    new Scale("Diminshed 7th starting on F♯", "2 octaves"),
-    new Scale("Diminshed 7th starting on B", "2 octaves"),
-    new Scale("Diminshed 7th starting on C", "2 octaves")
+    new Scale("Diminished 7th starting on G", "2 octaves"),
+    new Scale("Diminished 7th starting on A",  "2 octaves"),
+    new Scale("Diminished 7th starting on G♯", "2 octaves"),
+    new Scale("Diminished 7th starting on B♭", "2 octaves"),
+    new Scale("Diminished 7th starting on F♯", "2 octaves"),
+    new Scale("Diminished 7th starting on B", "2 octaves"),
+    new Scale("Diminished 7th starting on C", "2 octaves")
 ];

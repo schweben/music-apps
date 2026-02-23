@@ -166,6 +166,12 @@ describe('MELODIC_MINOR_SCALES', () => {
       expect(scale.getKey()).not.toBeNull();
     });
   });
+
+  it('should map B Melodic Minor to D major key signature', () => {
+    const bMelodicMinor = MELODIC_MINOR_SCALES.find(s => s.getName() === 'B Melodic Minor');
+    expect(bMelodicMinor).toBeDefined();
+    expect(bMelodicMinor?.getKey()).toBe('2♯');
+  });
 });
 
 describe('CHROMATIC_SCALES', () => {
@@ -243,6 +249,12 @@ describe('DOMINANT_7TH_SCALES', () => {
     expect(names.some(n => n.includes('key of C'))).toBe(true);
     expect(names.some(n => n.includes('key of G'))).toBe(true);
   });
+
+  it('should map Dominant 7th in D to D major key signature', () => {
+    const dominantD = DOMINANT_7TH_SCALES.find(s => s.getName() === 'Dominant 7th in the key of D');
+    expect(dominantD).toBeDefined();
+    expect(dominantD?.getKey()).toBe('2♯');
+  });
 });
 
 describe('DIMINISHED_7TH_SCALES', () => {
@@ -250,9 +262,9 @@ describe('DIMINISHED_7TH_SCALES', () => {
     expect(DIMINISHED_7TH_SCALES).toHaveLength(7);
   });
 
-  it('should all contain "Diminshed 7th" in name', () => {
+  it('should all contain "Diminished 7th" in name', () => {
     DIMINISHED_7TH_SCALES.forEach(scale => {
-      expect(scale.getName()).toContain('Diminshed 7th');
+      expect(scale.getName()).toContain('Diminished 7th');
     });
   });
 
