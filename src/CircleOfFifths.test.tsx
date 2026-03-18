@@ -74,7 +74,7 @@ describe('CircleOfFifths Component', () => {
       const canvas = container.querySelector('canvas') as HTMLCanvasElement;
 
       expect(canvas).toBeInTheDocument();
-      // Simulate a click on the canvas (at center position to ensure it's a valid click)
+      // Simulate a click on the canvas (at centre position to ensure it's a valid click)
       await user.click(canvas);
       expect(canvas).toBeInTheDocument();
     });

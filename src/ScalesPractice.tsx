@@ -78,7 +78,7 @@ const ScalesPractice = () => {
                 <h2>Select which type of scale to practice</h2>
                 <form id="form" onSubmit={handleSubmit}>
                     <ul>
-                        <li><label><input type="checkbox" name="major" defaultChecked={true} onChange={clearScale} />Major</label></li>
+                        <li><label><input type="checkbox" name="major" onChange={clearScale} defaultChecked={true} />Major</label></li>
                         <li><label><input type="checkbox" name="harmonic" onChange={clearScale} />Harmonic Minor</label></li>
                         <li><label><input type="checkbox" name="melodic" onChange={clearScale} />Melodic Minor</label></li>
                         <li><label><input type="checkbox" name="chromatic" onChange={clearScale} />Chromatic</label></li >

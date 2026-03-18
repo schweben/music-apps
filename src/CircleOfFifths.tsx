@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import HelpPanel from './HelpPanel';
 import { MajorKey } from './Keys';
@@ -27,9 +26,9 @@ const CircleOfFifths = () => {
         // Clear canvas before drawing
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Calculate the center of the canvas
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
+        // Calculate the centre of the canvas
+        const centreX = canvas.width / 2;
+        const centreY = canvas.height / 2;
 
         // Set stroke color and width
         ctx.strokeStyle = '#000000';
@@ -52,19 +51,19 @@ const CircleOfFifths = () => {
 
         // Draw outer circle (360 degree arc = 2 * PI radians)
         ctx.beginPath();
-        ctx.arc(centerX, centerY, outerRadius, 0, 2 * Math.PI);
+        ctx.arc(centreX, centreY, outerRadius, 0, 2 * Math.PI);
         ctx.fill();
         ctx.stroke();
 
         // Draw middle circle
         ctx.beginPath();
-        ctx.arc(centerX, centerY, middleRadius, 0, 2 * Math.PI);
+        ctx.arc(centreX, centreY, middleRadius, 0, 2 * Math.PI);
         ctx.stroke();
 
         // Draw inner circle
         ctx.fillStyle = "rgb(210, 181, 140)";
         ctx.beginPath();
-        ctx.arc(centerX, centerY, innerRadius, 0, 2 * Math.PI);
+        ctx.arc(centreX, centreY, innerRadius, 0, 2 * Math.PI);
         ctx.fill();
         ctx.stroke();
 
@@ -79,10 +78,10 @@ const CircleOfFifths = () => {
             const angleRad = (degrees - 90) * Math.PI / 180;
 
             // Calculate start and endpoint of line
-            const startX = centerX + innerRadius * Math.cos(angleRad);
-            const startY = centerY + innerRadius * Math.sin(angleRad);
-            const endX = centerX + outerRadius * Math.cos(angleRad);
-            const endY = centerY + outerRadius * Math.sin(angleRad);
+            const startX = centreX + innerRadius * Math.cos(angleRad);
+            const startY = centreY + innerRadius * Math.sin(angleRad);
+            const endX = centreX + outerRadius * Math.cos(angleRad);
+            const endY = centreY + outerRadius * Math.sin(angleRad);
 
             ctx.beginPath();
             ctx.moveTo(startX, startY);
@@ -102,30 +101,30 @@ const CircleOfFifths = () => {
             // Draw outer ring segment
             ctx.fillStyle = 'rgba(255, 200, 0, 0.5)';
             ctx.beginPath();
-            ctx.arc(centerX, centerY, outerRadius, angle1Rad, angle2Rad);
-            ctx.lineTo(centerX + middleRadius * Math.cos(angle2Rad), centerY + middleRadius * Math.sin(angle2Rad));
-            ctx.arc(centerX, centerY, middleRadius, angle2Rad, angle1Rad, true);
+            ctx.arc(centreX, centreY, outerRadius, angle1Rad, angle2Rad);
+            ctx.lineTo(centreX + middleRadius * Math.cos(angle2Rad), centreY + middleRadius * Math.sin(angle2Rad));
+            ctx.arc(centreX, centreY, middleRadius, angle2Rad, angle1Rad, true);
             ctx.closePath();
             ctx.fill();
 
             // Draw inner ring segment
             ctx.beginPath();
-            ctx.arc(centerX, centerY, middleRadius, angle1Rad, angle2Rad);
-            ctx.lineTo(centerX + innerRadius * Math.cos(angle2Rad), centerY + innerRadius * Math.sin(angle2Rad));
-            ctx.arc(centerX, centerY, innerRadius, angle2Rad, angle1Rad, true);
+            ctx.arc(centreX, centreY, middleRadius, angle1Rad, angle2Rad);
+            ctx.lineTo(centreX + innerRadius * Math.cos(angle2Rad), centreY + innerRadius * Math.sin(angle2Rad));
+            ctx.arc(centreX, centreY, innerRadius, angle2Rad, angle1Rad, true);
             ctx.closePath();
             ctx.fill();
 
             // Fill the centre circle
             ctx.beginPath();
-            ctx.arc(centerX, centerY, innerRadius, 0, 2 * Math.PI);
+            ctx.arc(centreX, centreY, innerRadius, 0, 2 * Math.PI);
             ctx.fill();
 
-            // Display key signature in center
+            // Display key signature in centre
             const key = MajorKey.getMajorKeysForCircleOfFifths()[highlightedSegment];
             const keySignature = MajorKey.getDualKeySignature(key);
             ctx.fillStyle = '#000000';
-            ctx.fillText(`${keySignature}`, centerX, centerY);
+            ctx.fillText(`${keySignature}`, centreX, centreY);
         }
 
         // Set text color and draw key names in the middle of each segment
@@ -137,13 +136,13 @@ const CircleOfFifths = () => {
             const midAngle = ((angle1 + angle2) / 2);
             const midAngleRad = (midAngle - 90) * Math.PI / 180;
             const outerTextRadius = (middleRadius + outerRadius) / 2;
-            const outerTextX = centerX + outerTextRadius * Math.cos(midAngleRad);
-            const outerTextY = centerY + outerTextRadius * Math.sin(midAngleRad);
+            const outerTextX = centreX + outerTextRadius * Math.cos(midAngleRad);
+            const outerTextY = centreY + outerTextRadius * Math.sin(midAngleRad);
             ctx.fillText(MajorKey.getMajorKeysForCircleOfFifths()[i], outerTextX, outerTextY);
 
             const innerTextRadius = (innerRadius + middleRadius) / 2;
-            const innerTextX = centerX + innerTextRadius * Math.cos(midAngleRad);
-            const innerTextY = centerY + innerTextRadius * Math.sin(midAngleRad);
+            const innerTextX = centreX + innerTextRadius * Math.cos(midAngleRad);
+            const innerTextY = centreY + innerTextRadius * Math.sin(midAngleRad);
             ctx.fillText(MajorKey.getMinorKeys()[i], innerTextX, innerTextY);
         }
     };
@@ -177,14 +176,14 @@ const CircleOfFifths = () => {
         const clickX = event.clientX - rect.left;
         const clickY = event.clientY - rect.top;
 
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
+        const centreX = canvas.width / 2;
+        const centreY = canvas.height / 2;
 
-        // Calculate distance from center
-        const dx = clickX - centerX;
-        const dy = clickY - centerY;
+        // Calculate distance from centre
+        const dx = clickX - centreX;
+        const dy = clickY - centreY;
 
-        // Calculate angle from center (in degrees, with 0 at top, clockwise)
+        // Calculate angle from centre (in degrees, with 0 at top, clockwise)
         let angle = Math.atan2(dy, dx) * 180 / Math.PI;
         // Convert to 0-360 range with 0 at top
         angle = (angle + 90 + 360) % 360;
