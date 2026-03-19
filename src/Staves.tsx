@@ -40,52 +40,50 @@ const Staves = () => {
 
     const drawTrebleClef = (
         ctx: CanvasRenderingContext2D,
-        staffLeft: number,
-        staffTop: number,
+        staveLeft: number,
+        staveTop: number,
         lineSpacing: number,
         scale: number
     ) => {
         if (!trebleClefImageRef.current) return;
         const img = trebleClefImageRef.current;
-        const width = 80 * scale;
-        const height = 150 * scale;
-        const x = staffLeft + 14 * scale;
-        const gLineY = staffTop + (3 * lineSpacing);
-        const y = gLineY - (height * 0.43);
+        const height = 130 * scale;
+        const width = height * (img.width / img.height);
+        const x = staveLeft + 10 * scale;
+        const gLineY = staveTop + (3 * lineSpacing);
+        // Anchor the treble clef spiral on the G line.
+        const y = gLineY - (height * 0.62);
         ctx.drawImage(img, x, y, width, height);
     };
 
     const drawAltoClef = (
         ctx: CanvasRenderingContext2D,
-        staffLeft: number,
-        staffTop: number,
+        staveLeft: number,
+        staveTop: number,
         lineSpacing: number,
         scale: number
     ) => {
         if (!altoClefImageRef.current) return;
         const img = altoClefImageRef.current;
-        const width = 65 * scale;
-        const height = 120 * scale;
-        const x = staffLeft + 20 * scale;
-        const middleLineY = staffTop + (2 * lineSpacing);
-        const y = middleLineY - (height * 0.5);
+        const height = lineSpacing * 4;
+        const width = 44 * scale;
+        const x = staveLeft + 10 * scale;
+        const y = staveTop;
         ctx.drawImage(img, x, y, width, height);
     };
 
     const drawBassClef = (
         ctx: CanvasRenderingContext2D,
-        staffLeft: number,
-        staffTop: number,
-        lineSpacing: number,
+        staveLeft: number,
+        staveTop: number,
         scale: number
     ) => {
         if (!bassClefImageRef.current) return;
         const img = bassClefImageRef.current;
-        const width = 75 * scale;
-        const height = 90 * scale;
-        const x = staffLeft + 12 * scale;
-        const fLineY = staffTop + lineSpacing;
-        const y = fLineY - (height * 0.4);
+        const width = 56 * scale;
+        const height = 68 * scale;
+        const x = staveLeft + 10 * scale;
+        const y = staveTop;
         ctx.drawImage(img, x, y, width, height);
     };
 
@@ -112,7 +110,8 @@ const Staves = () => {
         const centreX = canvas.width / 2;
         const centreY = canvas.height / 2;
 
-        const staffLeft = centreX - (size / 2);
+        const staveLeft = centreX - (size / 2) + 5;
+        const staveRight = centreX + (size /2) - 5;
         const lineSpacing = 20 * scale;
 
         // Set stroke color and width
@@ -120,8 +119,8 @@ const Staves = () => {
         ctx.lineWidth = 1;
 
         for (let i = 0; i < 5; i++) {
-            const startX = staffLeft;
-            const endX = centreX + (size / 2);
+            const startX = staveLeft;
+            const endX = staveRight;
 
             const startY = centreY + (i * lineSpacing);
             const endY = centreY + (i * lineSpacing);
@@ -131,13 +130,30 @@ const Staves = () => {
             ctx.stroke();
         }
 
+        // Draw barlines
+        ctx.beginPath();
+        ctx.moveTo(staveLeft, centreY);
+        ctx.lineTo(staveLeft, centreY + (4 * lineSpacing));
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(staveRight - 10, centreY);
+        ctx.lineTo(staveRight - 10, centreY + (4 * lineSpacing));
+        ctx.stroke();
+
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(staveRight, centreY);
+        ctx.lineTo(staveRight, centreY + (4 * lineSpacing));
+        ctx.stroke();
+
         // Draw selected clef symbol.
         if (clef === 'treble') {
-            drawTrebleClef(ctx, staffLeft, centreY, lineSpacing, scale);
+            drawTrebleClef(ctx, staveLeft, centreY, lineSpacing, scale);
         } else if (clef === 'alto') {
-            drawAltoClef(ctx, staffLeft, centreY, lineSpacing, scale);
+            drawAltoClef(ctx, staveLeft, centreY, lineSpacing, scale);
         } else if (clef === 'bass') {
-            drawBassClef(ctx, staffLeft, centreY, lineSpacing, scale);
+            drawBassClef(ctx, staveLeft, centreY, scale);
         }
     }, [clef]);
 
@@ -147,7 +163,6 @@ const Staves = () => {
 
     const updateClef = (event: ChangeEvent<HTMLInputElement>) => {
         setClef(event.target.value);
-        console.log("Clef = " + event.target.value);
     }
 
     return (
