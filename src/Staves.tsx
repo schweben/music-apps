@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type ChangeEvent } from "reac
 import trebleClefImage from "./assets/treble-clef.svg";
 import bassClefImage from "./assets/bass-clef.svg";
 import altoClefImage from "./assets/alto-clef.svg";
+import './Staves.css'
 
 const Staves = () => {
     const [clef, setClef] = useState("treble");
@@ -170,11 +171,11 @@ const Staves = () => {
             <div className="panel-header">
                 <h1>Staves</h1>
             </div>
-            <div>
+            <ul>
                 <li><label><input type="radio" name="clef" value="treble" onChange={updateClef} defaultChecked={true}/>Treble clef</label></li>
                 <li><label><input type="radio" name="clef" value="alto" onChange={updateClef}/>Alto clef</label></li>
                 <li><label><input type="radio" name="clef" value="bass" onChange={updateClef}/>Bass clef</label></li>
-            </div>
+            </ul>
             <canvas ref={canvasRef} id="staves"></canvas>
         </div>
     );
