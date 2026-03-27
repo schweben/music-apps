@@ -212,7 +212,7 @@ form {
   gap: 1rem;
 }
 
-label {
+label, .form-label {
   flex: 0 0 auto;
   min-width: 150px;
   text-align: right;
