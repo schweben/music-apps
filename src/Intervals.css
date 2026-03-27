@@ -1,0 +1,14 @@
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.radio-label {
+    min-width: unset;
+    text-align: left;
+}
+
+.form-submit {
+    margin-top: 0.5rem;
+}

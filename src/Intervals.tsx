@@ -1,5 +1,5 @@
+import './Intervals.css';
 import React, { useState } from 'react';
-
 import HelpPanel from './HelpPanel';
 import { MajorKey } from './Keys';
 import { INTERVALS } from './musicConstants';
@@ -93,12 +93,12 @@ const Intervals = () => {
                 </div>
                 <div className="form-group">
                     <span className="form-label">Direction:</span>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                        <label htmlFor="up" style={{ minWidth: 'unset', textAlign: 'left' }}><input type="radio" id="up" name="direction" value="up" onChange={handleDirectionChange}/>Up</label>
-                        <label htmlFor="down" style={{ minWidth: 'unset', textAlign: 'left' }}><input type="radio" id="down" name="direction" value="down" onChange={handleDirectionChange}/>Down</label>
+                    <div className="radio-group">
+                        <label htmlFor="up" className="radio-label"><input type="radio" id="up" name="direction" value="up" onChange={handleDirectionChange}/>Up</label>
+                            <label htmlFor="down" className="radio-label"><input type="radio" id="down" name="direction" value="down" onChange={handleDirectionChange}/>Down</label>
                     </div>
                 </div>
-                <button disabled={!formValid} type="submit" style={{ marginTop: '0.5rem' }}>Transpose</button>
+                <button disabled={!formValid} type="submit" className="form-submit">Transpose</button>
             </form>
         </div>
         {transposedNote !== undefined && (
