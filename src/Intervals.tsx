@@ -98,7 +98,7 @@ const Intervals = () => {
                             <label htmlFor="down" className="radio-label"><input type="radio" id="down" name="direction" value="down" onChange={handleDirectionChange}/>Down</label>
                     </div>
                 </div>
-                <button disabled={!formValid} type="submit" className="form-submit">Transpose</button>
+                <button disabled={!formValid()} type="submit" className="form-submit">Transpose</button>
             </form>
         </div>
         {transposedNote !== undefined && (

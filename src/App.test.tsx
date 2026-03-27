@@ -34,7 +34,7 @@ describe('App Component', () => {
       const nav = document.querySelector('nav');
       const links = nav?.querySelectorAll('a');
 
-      expect(links).toHaveLength(3);
+      expect(links).toHaveLength(4);
     });
   });
 
