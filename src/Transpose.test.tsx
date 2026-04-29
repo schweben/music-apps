@@ -46,7 +46,7 @@ describe('Transpose Component', () => {
       const sourceInstrument = screen.getByLabelText(/source instrument key/i);
       const options = sourceInstrument.querySelectorAll('option');
 
-      expect(options.length).toBe(8);
+      expect(options.length).toBe(9);
       expect(options[0]).toHaveValue('C');
     });
 
@@ -55,7 +55,7 @@ describe('Transpose Component', () => {
       const targetInstrument = screen.getByLabelText(/target instrument key/i);
       const options = targetInstrument.querySelectorAll('option');
 
-      expect(options.length).toBe(8);
+      expect(options.length).toBe(9);
     });
 
     it('should allow selecting different instruments', async () => {

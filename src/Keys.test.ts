@@ -6,7 +6,7 @@ describe('Keys Constants', () => {
   describe('TRANSPOSING_INSTRUMENTS', () => {
     it('should contain valid transposing instrument keys', () => {
       expect(TRANSPOSING_INSTRUMENTS).toBeDefined();
-      expect(TRANSPOSING_INSTRUMENTS).toHaveLength(8);
+      expect(TRANSPOSING_INSTRUMENTS).toHaveLength(9);
     });
 
     it('should include common transposing instruments', () => {

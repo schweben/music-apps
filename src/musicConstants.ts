@@ -7,6 +7,7 @@ export const TRANSPOSING_INSTRUMENTS: string[] = [
     "E♭",
     "E",
     "F",
+    "A♭",
     "A",
     "B♭",
     "B"
