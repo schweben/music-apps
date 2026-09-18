@@ -4,10 +4,14 @@ import Transpose from './Transpose';
 import ScalesPractice from './ScalesPractice';
 import CircleOfFifths from './CircleOfFifths';
 
+const routerBase = window.location.pathname === '/music' || window.location.pathname.startsWith('/music/')
+    ? '/music'
+    : undefined;
+
 const App = () => {
     return (
         <div className="App">
-            <BrowserRouter>
+            <BrowserRouter basename={routerBase}>
                 <nav>
                     <Link to="/">Circle of Fifths</Link>
                     <Link to="/transpose">Transposition</Link>

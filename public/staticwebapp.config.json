@@ -1,4 +1,11 @@
 {
+  "routes": [
+    {
+      "route": "/music",
+      "redirect": "/music/",
+      "statusCode": 301
+    }
+  ],
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": [
